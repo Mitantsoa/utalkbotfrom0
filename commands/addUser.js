@@ -6,7 +6,8 @@ const listDBfield =[
     {id:"username",label:"Nom",required:true},
     {id:"firstname",label:"Prénom",required: true},
     {id:"uuid",label:"Matricule",required: true},
-    {id:"adress",label:"Adress",required: false}
+    {id:"adress",label:"Adress",required: false},
+    {id:"tel",label:"Téléphone",required: false},
 ]
 
 const inputbuilder = listDBfield.map(v=>{
@@ -57,7 +58,26 @@ const action = ()=>{
                 "custom_id": "cool_modal",
                 "components": [{
                     "type": 1,
-                    "components": inputbuilder
+                    "components": [{
+                        "type": 4,
+                        "custom_id": "name",
+                        "label": "Name",
+                        "style": 1,
+                        "min_length": 1,
+                        "max_length": 4000,
+                        "placeholder": "John",
+                        "required": true
+                    },
+                        {
+                            "type": 4,
+                            "custom_id": "name2",
+                            "label": "Name",
+                            "style": 1,
+                            "min_length": 1,
+                            "max_length": 4000,
+                            "placeholder": "John",
+                            "required": true
+                        }]
                 }]
             }
         };
