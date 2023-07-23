@@ -66,7 +66,7 @@ function capitalize(str) {
 
 function logger(text){
     const now = moment().format('yyyy-MM-DD HH:mm:ss');
-    const filename = "/home/victoryp/log/Botutalk_"+moment().format('yyyy-MM')+".log"
+    const filename = "/home/victoryp/logs/Botutalk_"+moment().format('yyyy-MM')+".log"
     const content = now+": "+text
     fs.appendFile(filename,content,function(err){ if(err) throw err;});
     return console.log(now,": ",text);
