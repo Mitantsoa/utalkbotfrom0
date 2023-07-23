@@ -128,6 +128,7 @@ async function x(editurl,createdurl) {
         type: InteractionResponseType.MODAL,
         "data": {
             "tts": false,
+            content:"to modal",
             title:"my modal awaited",
             custom_id:"M001",
             "allowed_mentions": { "parse": [] },
