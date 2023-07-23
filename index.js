@@ -104,9 +104,7 @@ async function x(editurl) {
     //     //     resolve(data);
     //     // },5000);
     // });
-    const data = {
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        "data": {
+    const data ={
             "tts": false,
             "content": "this is from await",
             "embeds": [],
@@ -124,7 +122,7 @@ async function x(editurl) {
                     ]
                 }
             ]
-        }};
+        };
     // const data = {
     //     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
     //     "data": {
