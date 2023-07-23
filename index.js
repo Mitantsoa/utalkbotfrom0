@@ -64,7 +64,7 @@ app.post('/interactions', async function (req, res) {
                 x(editurl)
                 // Send a message into the channel where command was triggered from
                 const data = {
-                    type: InteractionResponseType.MODAL,
+                    type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
                     "data": {
                         "tts": false,
                         // "content": "this is from await",
@@ -120,32 +120,25 @@ async function x(editurl) {
     //     // },5000);
     // });
     const data = {
-        content:"this is to update",
         type:9,
-        "components": [
-            {
+        data:{
+            "tts": false,
+            "title": "My Cool Modal from await",
+            "custom_id": "cool_modal",
+            "components": [{
                 "type": 1,
-                "components": [
-                    {
-                        "title": "My Cool Modal",
-                        "custom_id": "cool_modal",
-                        "components": [{
-                            "type": 1,
-                            "components": [{
-                                "type": 4,
-                                "custom_id": "name",
-                                "label": "Name",
-                                "style": 1,
-                                "min_length": 1,
-                                "max_length": 4000,
-                                "placeholder": "John",
-                                "required": true
-                            }]
-                        }]
-                    }
-                ]
-            }
-        ]
+                "components": [{
+                    "type": 4,
+                    "custom_id": "name",
+                    "label": "Name",
+                    "style": 1,
+                    "min_length": 1,
+                    "max_length": 4000,
+                    "placeholder": "John",
+                    "required": true
+                }]
+            }]
+        }
     };
     // const data = {
     //     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
