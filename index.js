@@ -28,11 +28,16 @@ const repoAgent = require('./repository/repoAgent.js')
 app.post('/interactions', async function (req, res) {
     // Interaction type and data
     const { type, id, data, member} = req.body;
+    console.group("req Body")
+    console.log(req.body)
+    console.groupEnd()
     logger("request type = "+ type)
     logger("InteractionType.PING = " + InteractionType.PING)
-    logger("user =" + req.user)
     console.log('member',member)
     const username = member.user.username
+    logger("user =" + username)
+    logger("AppId =" + id)
+
     /**
      * Handle verification requests
      */
