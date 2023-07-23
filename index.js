@@ -30,7 +30,7 @@ app.post('/interactions', async function (req, res) {
     // Interaction type and data
     const { type, application_id, data, member,token,id} = req.body;
     console.group("req Body")
-    console.log(req.body)
+    // console.log(req.body)
     console.groupEnd()
     logger("request type = "+ type)
     logger("InteractionType.PING = " + InteractionType.PING)
