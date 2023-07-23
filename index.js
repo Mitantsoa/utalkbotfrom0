@@ -106,6 +106,7 @@ async function x(editurl) {
     // });
     const data = {
         content:"this is to update",
+        type:9,
         "components": [
             {
                 "type": 1,
