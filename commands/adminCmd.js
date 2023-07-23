@@ -14,7 +14,22 @@ const action = ()=>{
                 "content": "this is from await",
                 "embeds": [],
                 "allowed_mentions": { "parse": [] },
-                "components": []
+                "components": [{
+                    "type": 1,
+                    "components": [
+                        {
+                            "type": 2,
+                            "label": "Add user",
+                            "style": 1,
+                            "custom_id": "add_user"
+                        },{
+                            "type": 2,
+                            "label": "Add login",
+                            "style": 2,
+                            "custom_id": "add_login"
+                        }
+                    ]
+                }]
             }};
         return data;
 
