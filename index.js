@@ -148,13 +148,13 @@ async function x(editurl,createdurl) {
     logger("editurl =" + editurl)
 
     // updating loading message
-    // await axios.patch(editurl,data)
-    //     .then(data => console.log("axios response: success"))
-    //     .catch(e => console.log("axios error: error"))
+    await axios.patch(editurl,dataModal)
+        .then(data => console.log("axios response: success"))
+        .catch(e => console.log("axios error: error",e.response.data))
 
     // opening modal
-    logger("createdurl =" + createdurl)
-    await axios.post(createdurl,dataModal)
-        .then(data => console.log("Modal open"))
-        .catch(e => console.log("there is error",e))
+    // logger("createdurl =" + createdurl)
+    // await axios.post(createdurl,dataModal)
+    //     .then(data => console.log("Modal open"))
+    //     .catch(e => console.log("there is error",e.response.data))
 }
