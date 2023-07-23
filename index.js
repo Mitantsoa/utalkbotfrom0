@@ -53,31 +53,7 @@ app.post('/interactions', async function (req, res) {
             logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE);
 
             try {
-                const m = await setTimeout(function(){
-                    logger("wait 5")
-                    return {
-                        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-                        "data": {
-                            "tts": false,
-                            "content": "this is from await",
-                            "embeds": [],
-                            "allowed_mentions": { "parse": [] },
-                            "components": [
-                                {
-                                    "type": 1,
-                                    "components": [
-                                        {
-                                            "type": 2,
-                                            "label": "Click me!",
-                                            "style": 1,
-                                            "custom_id": "click_one"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }};
-                }, 5000);
-
+                const m = await x()
                 // Send a message into the channel where command was triggered from
                 logger(m)
                 res.send(m);
@@ -104,3 +80,33 @@ app.post('/',async function(req, res){
 app.listen(PORT, () => {
     logger('Listening on port', PORT);
 });
+
+
+function x() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const data = {
+                type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                "data": {
+                    "tts": false,
+                    "content": "this is from await",
+                    "embeds": [],
+                    "allowed_mentions": { "parse": [] },
+                    "components": [
+                        {
+                            "type": 1,
+                            "components": [
+                                {
+                                    "type": 2,
+                                    "label": "Click me!",
+                                    "style": 1,
+                                    "custom_id": "click_one"
+                                }
+                            ]
+                        }
+                    ]
+                }};
+            resolve(data);
+        },5000);
+    });
+}
