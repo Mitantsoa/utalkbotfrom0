@@ -28,7 +28,7 @@ const repoAgent = require('./repository/repoAgent.js')
  */
 app.post('/interactions', async function (req, res) {
     // Interaction type and data
-    const { type, application_id, data, member,token} = req.body;
+    const { type, application_id, data, member,token,id} = req.body;
     console.group("req Body")
     console.log(req.body)
     console.groupEnd()
@@ -41,6 +41,7 @@ app.post('/interactions', async function (req, res) {
 
     const editurl = `https://discord.com/api/webhooks/${application_id}/${token}/messages/@original`
     // const editurl = "https://discord.com/api/webhooks/1094067986412863508/aW50ZXJhY3Rpb246MTEzMjU0Nzk3MDU1NDkzNzM1NjpqVHY5QWRhQUdGTHJaNGlLSDlZS1FGTkd2UW16c0tRTkNDMDNBbWt3RDRNVDF0Z1RUdjhEcDVTbUlnYUJzQ2w1YXZ3V0NmeHBROFJsNXlTTlltb3hZSTNSTjV2aEgyZFFHNFViN1AxRG1NeWpyV3lJbXhTRTVSb3pRdE0yTm5ZWA/messages/@original"
+    const createdurl = `https://discord.com/api/interactions/${id}/${token}/callback`;
     /**
      * Handle verification requests
      */
@@ -61,7 +62,7 @@ app.post('/interactions', async function (req, res) {
             logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE);
 
             try {
-                x(editurl)
+                x(editurl,createdurl)
                 // Send a message into the channel where command was triggered from
                 const data = {
                     type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
@@ -98,7 +99,7 @@ app.listen(PORT, () => {
 });
 
 
-async function x(editurl) {
+async function x(editurl,createdurl) {
     // return new Promise((resolve, reject,) => {
     //     // setTimeout(async (editurl) => {
     //     //     resolve(data);
@@ -123,29 +124,36 @@ async function x(editurl) {
                 }
             ]
         };
-    // const data = {
-    //     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-    //     "data": {
-    //         "tts": false,
-    //         "content": "this is from await",
-    //         "embeds": [],
-    //         "allowed_mentions": { "parse": [] },
-    //         "components": [
-    //             {
-    //                 "type": 1,
-    //                 "components": [
-    //                     {
-    //                         "type": 2,
-    //                         "label": "Click me!",
-    //                         "style": 1,
-    //                         "custom_id": "click_one"
-    //                     }
-    //                 ]
-    //             }
-    //         ]
-    //     }};
+    const dataModal = {
+        type: InteractionResponseType.MODAL,
+        "data": {
+            "tts": false,
+            title:"my modal awaited",
+            custom_id:"M001",
+            "allowed_mentions": { "parse": [] },
+            "components": [
+                {
+                    "type": 1,
+                    "components": [
+                        {
+                            "type": 2,
+                            "label": "Click me!",
+                            "style": 1,
+                            "custom_id": "click_one"
+                        }
+                    ]
+                }
+            ]
+        }};
     logger("editurl =" + editurl)
+
+    // updating loading message
     await axios.patch(editurl,data)
-        .then(data => console.log("axios response:",data.data))
-        .catch(e => console.log("axios error:",e.data,e.request))
+        .then(data => console.log("axios response: success"))
+        .catch(e => console.log("axios error: error"))
+
+    // opening modal
+    await axios.post(createdurl,dataModal)
+        .then(data => console.log("Modal open"))
+        .catch(e => console.log("there is error"))
 }
