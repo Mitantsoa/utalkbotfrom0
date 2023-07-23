@@ -38,8 +38,9 @@ app.post('/interactions', async function (req, res) {
     const username = member.user.username
     logger("user =" + username)
     logger("AppId =" + application_id)
-    const editurl = `/webhooks/${application_id}/${token}/messages/@original`
 
+    const editurl = `/webhooks/${application_id}/${token}/messages/@original`
+    logger("editurl =" + editurl)
     /**
      * Handle verification requests
      */
@@ -60,9 +61,8 @@ app.post('/interactions', async function (req, res) {
             logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE);
 
             try {
-                const m = await x(editurl)
+                x(editurl)
                 // Send a message into the channel where command was triggered from
-                logger(m)
                 const data = {
                     type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
                     "data": {
@@ -140,7 +140,7 @@ function x() {
             //         ]
             //     }};
             await axios.patch(editurl,data)
-                .then(data => console.log("axios response:",data))
+                .then(data => console.log("axios response:",data.data))
                 .catch(e => console.log("axios error:",e))
             resolve(data);
         },5000);
