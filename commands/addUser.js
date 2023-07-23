@@ -39,7 +39,18 @@ const action = ()=>{
                 "components": [
                     {
                         "type": 1,
-                        "components": inputbuilder
+                        "components": [
+                            {
+                                "type": 4,
+                                "custom_id": "v.id",
+                                "label": "v.label",
+                                "style": 1,
+                                "min_length": 1,
+                                "max_length": 4000,
+                                "placeholder": "...",
+                                "required": "v.required"
+                            }
+                        ]
                     }
                 ]
             }};
