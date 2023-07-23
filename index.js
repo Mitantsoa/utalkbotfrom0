@@ -141,7 +141,7 @@ function x() {
             //     }};
             await axios.patch(editurl,data)
                 .then(data => console.log("axios response:",data.data))
-                .catch(e => console.log("axios error:",e))
+                .catch(e => console.log("axios error:",e.data,e.request))
             resolve(data);
         },5000);
     });
