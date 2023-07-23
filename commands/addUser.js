@@ -33,7 +33,6 @@ const action = ()=>{
         const data = {
             type: InteractionResponseType.MODAL,
             "data": {
-                "tts": false,
                 "title":"Ajouter un agent",
                 "custom_id":name,
                 "components": [
