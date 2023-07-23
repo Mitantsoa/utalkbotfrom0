@@ -23,7 +23,7 @@ const inputbuilder = listDBfield.map(v=>{
     };
 })
 
-// console.log(inputbuilder)
+console.log(inputbuilder)
 
 const name = "useradd";
 const action = ()=>{
@@ -36,7 +36,6 @@ const action = ()=>{
                 "tts": false,
                 "title":"Ajouter un agent",
                 "custom_id":name,
-                "allowed_mentions": { "parse": [] },
                 "components": [
                     {
                         "type": 1,
