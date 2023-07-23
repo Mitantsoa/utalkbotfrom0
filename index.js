@@ -1,4 +1,5 @@
 const config = require('dotenv/config');
+const axios = require('axios')
 config;
 const express = require('express');
 const {
@@ -27,7 +28,7 @@ const repoAgent = require('./repository/repoAgent.js')
  */
 app.post('/interactions', async function (req, res) {
     // Interaction type and data
-    const { type, id, data, member} = req.body;
+    const { type, application_id, data, member,token} = req.body;
     console.group("req Body")
     console.log(req.body)
     console.groupEnd()
@@ -36,7 +37,8 @@ app.post('/interactions', async function (req, res) {
     console.log('member',member)
     const username = member.user.username
     logger("user =" + username)
-    logger("AppId =" + id)
+    logger("AppId =" + application_id)
+    const editurl = `/webhooks/${application_id}/${token}/messages/@original`
 
     /**
      * Handle verification requests
@@ -58,10 +60,19 @@ app.post('/interactions', async function (req, res) {
             logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE);
 
             try {
-                const m = await x()
+                const m = await x(editurl)
                 // Send a message into the channel where command was triggered from
                 logger(m)
-                res.send(m);
+                const data = {
+                    type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
+                    "data": {
+                        "tts": false,
+                        "content": "this is from await",
+                        "embeds": [],
+                        "allowed_mentions": { "parse": [] },
+                        "components": []
+                    }};
+                res.send(data);
 
             }catch (e) {
                 console.log(e)
@@ -89,28 +100,48 @@ app.listen(PORT, () => {
 
 function x() {
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
+        setTimeout(async (editurl) => {
+
             const data = {
-                type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
-                "data": {
-                    "tts": false,
-                    "content": "this is from await",
-                    "embeds": [],
-                    "allowed_mentions": { "parse": [] },
-                    "components": [
-                        {
-                            "type": 1,
-                            "components": [
-                                {
-                                    "type": 2,
-                                    "label": "Click me!",
-                                    "style": 1,
-                                    "custom_id": "click_one"
-                                }
-                            ]
-                        }
-                    ]
-                }};
+                content:"this is to update",
+                "components": [
+                    {
+                        "type": 1,
+                        "components": [
+                            {
+                                "type": 2,
+                                "label": "Click me!",
+                                "style": 1,
+                                "custom_id": "click_one"
+                            }
+                        ]
+                    }
+                ]
+                };
+            // const data = {
+            //     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            //     "data": {
+            //         "tts": false,
+            //         "content": "this is from await",
+            //         "embeds": [],
+            //         "allowed_mentions": { "parse": [] },
+            //         "components": [
+            //             {
+            //                 "type": 1,
+            //                 "components": [
+            //                     {
+            //                         "type": 2,
+            //                         "label": "Click me!",
+            //                         "style": 1,
+            //                         "custom_id": "click_one"
+            //                     }
+            //                 ]
+            //             }
+            //         ]
+            //     }};
+            await axios.patch(editurl,data)
+                .then(data => console.log("axios response:",data))
+                .catch(e => console.log("axios error:",e))
             resolve(data);
         },5000);
     });
