@@ -39,7 +39,7 @@ app.post('/interactions', async function (req, res) {
     logger("user =" + username)
     logger("AppId =" + application_id)
 
-    const editurl = `/webhooks/${application_id}/${token}/messages/@original`
+    const editurl = `https://discord.com/api/webhooks/${application_id}/${token}/messages/@original`
     logger("editurl =" + editurl)
     /**
      * Handle verification requests
