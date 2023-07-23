@@ -27,7 +27,7 @@ const inputbuilder = listDBfield.map(v=>{
 
 const name = "useradd";
 const action = ()=>{
-    logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE);
+    logger("InteractionResponseType.MODAL= "+ InteractionResponseType.MODAL);
     try {
         // Send a message into the channel where command was triggered from
         const data = {
