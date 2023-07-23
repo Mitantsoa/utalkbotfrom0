@@ -12,7 +12,23 @@ const action = ()=>{
             "data": {
                 "tts": false,
                 "content": "this is from await",
-                "embeds": [],
+                "embeds": [
+                    {
+                        "title": "Bouton de configuration",
+                        "description": "Uniquement authorise pour le superviseur",
+                        "color": 5814783,
+                        "fields": [
+                            {
+                                "name": "Add user",
+                                "value": "Ajouter un agent avec son **/nom, matricule, etc..**."
+                            },
+                            {
+                                "name": "Add login",
+                                "value": "Ajouter un login utilser avec le softphone avec son **/numéro**."
+                            }
+                        ]
+                    }
+                ],
                 "allowed_mentions": { "parse": [] },
                 "components": [{
                     "type": 1,
