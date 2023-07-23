@@ -4,3 +4,4 @@ botDBModel.mwb
 botDBModel.mwb.bak
 package-lock.json
 *.log
+/temp
