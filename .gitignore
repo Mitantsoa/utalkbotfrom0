@@ -3,3 +3,4 @@ node_modules
 botDBModel.mwb
 botDBModel.mwb.bak
 package-lock.json
+*.log
