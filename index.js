@@ -2,6 +2,7 @@ const config = require('dotenv/config');
 const axios = require('axios')
 config;
 const express = require('express');
+const fs = require('fs')
 const {
     InteractionType,
     InteractionResponseType,
@@ -10,7 +11,20 @@ const {
     ButtonStyleTypes,
 } =require('discord-interactions')
 const { VerifyDiscordRequest, getRandomEmoji, DiscordRequest,logger } = require('./service/utils.js');
-// import { getShuffledOptions, getResult } from './game.js';
+
+// Commands loading
+var normalizedPath = require("path").join(__dirname, "commands");
+let commandClass = {}
+console.log(normalizedPath)
+fs.readdirSync(normalizedPath).forEach(function(file) {
+
+    const body = require("./commands/" + file)
+    commandClass[body.name] = body.action;
+    console.log("./commands/" + file)
+
+});
+console.log(commandClass)
+// commandClass.AdminCmd()
 
 // Create an express app
 const app = express();
@@ -56,36 +70,18 @@ app.post('/interactions', async function (req, res) {
     if (type === InteractionType.APPLICATION_COMMAND) {
         const { name } = data;
         logger("name = "+name)
-
-        // "test" command
-        if (name === 'ping') {
-            logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE);
-
-            try {
-                x(editurl,createdurl)
-                // Send a message into the channel where command was triggered from
-                const data = {
-                    type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
-                    "data": {
-                        "tts": false,
-                        "content": "this is from await",
-                        "embeds": [],
-                        "allowed_mentions": { "parse": [] },
-                        "components": []
-                    }};
-                // res.send(data);
-
-            }catch (e) {
-                console.log(e)
-            }
-
-        }
-        if (name == 'useradd') {
-            logger("send pong");
-            // Send a message into the channel where command was triggered from
-            const resp = await repoAgent.findUser();
-            console.log(resp);
-        }
+        res.send(commandClass[name]())
+        // // "test" command
+        // if (name === 'ping') {
+        //     const resp = cmd.
+        //     res.send()
+        // }
+        // if (name == 'useradd') {
+        //     logger("send pong");
+        //     // Send a message into the channel where command was triggered from
+        //     const resp = await repoAgent.findUser();
+        //     console.log(resp);
+        // }
     }
 });
 
