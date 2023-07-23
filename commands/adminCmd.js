@@ -11,7 +11,7 @@ const action = ()=>{
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             "data": {
                 "tts": false,
-                "content": "this is from await",
+                "content": "ADMIN :",
                 "embeds": [
                     {
                         "title": "Bouton de configuration",

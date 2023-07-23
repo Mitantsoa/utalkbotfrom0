@@ -70,18 +70,12 @@ app.post('/interactions', async function (req, res) {
     if (type === InteractionType.APPLICATION_COMMAND) {
         const { name } = data;
         logger("name = "+name)
-        res.send(commandClass[name]())
-        // // "test" command
-        // if (name === 'ping') {
-        //     const resp = cmd.
-        //     res.send()
-        // }
-        // if (name == 'useradd') {
-        //     logger("send pong");
-        //     // Send a message into the channel where command was triggered from
-        //     const resp = await repoAgent.findUser();
-        //     console.log(resp);
-        // }
+        try{
+            res.send(commandClass[name]())
+        }catch (e) {
+            logger("command :"+name+", does not exist")
+        }
+
     }
 });
 
