@@ -48,7 +48,7 @@ app.post('/interactions', async function (req, res) {
     console.groupEnd()
     logger("request type = "+ type)
     logger("InteractionType.PING = " + InteractionType.PING)
-    console.log('member',member)
+    // console.log('member',member)
     const username = member.user.username
     logger("user =" + username)
     logger("AppId =" + application_id)
@@ -71,7 +71,9 @@ app.post('/interactions', async function (req, res) {
         const { name } = data;
         logger("name = "+name)
         try{
-            res.send(commandClass[name]())
+            const resp = commandClass[name]()
+            console.log(resp)
+            res.send(resp)
         }catch (e) {
             logger("command :"+name+", does not exist")
         }
