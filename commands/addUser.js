@@ -56,10 +56,16 @@ const action = ()=>{
             data:{
                 "title": "My Cool Modal",
                 "custom_id": "cool_modal",
-                "components": [{
-                    "type": 1,
-                    "components": inputbuilder
-                }]
+                "components": [
+                    {
+                        "type": 1,
+                        "components": inputbuilder
+                    },
+                    {
+                        "type": 1,
+                        "components": inputbuilder
+                    }
+                ]
             }
         };
         return data;
