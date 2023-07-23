@@ -73,7 +73,7 @@ app.post('/interactions', async function (req, res) {
                         "allowed_mentions": { "parse": [] },
                         "components": []
                     }};
-                res.send(data);
+                // res.send(data);
 
             }catch (e) {
                 console.log(e)
@@ -128,7 +128,7 @@ async function x(editurl,createdurl) {
         type: InteractionResponseType.MODAL,
         "data": {
             "tts": false,
-            content:"to modal",
+            // content:"to modal",
             title:"my modal awaited",
             custom_id:"M001",
             "allowed_mentions": { "parse": [] },
@@ -149,13 +149,13 @@ async function x(editurl,createdurl) {
     logger("editurl =" + editurl)
 
     // updating loading message
-    await axios.patch(editurl,dataModal)
-        .then(data => console.log("axios response: success"))
-        .catch(e => console.log("axios error: error",e.response.data))
+    // await axios.patch(editurl,dataModal)
+    //     .then(data => console.log("axios response: success"))
+    //     .catch(e => console.log("axios error: error",e.response.data))
 
     // opening modal
-    // logger("createdurl =" + createdurl)
-    // await axios.post(createdurl,dataModal)
-    //     .then(data => console.log("Modal open"))
-    //     .catch(e => console.log("there is error",e.response.data))
+    logger("createdurl =" + createdurl)
+    await axios.post(createdurl,dataModal)
+        .then(data => console.log("Modal open"))
+        .catch(e => console.log("there is error",e.response.data))
 }
