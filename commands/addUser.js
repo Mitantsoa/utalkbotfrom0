@@ -6,8 +6,7 @@ const listDBfield =[
     {id:"username",label:"Nom",required:true},
     {id:"firstname",label:"Prénom",required: true},
     {id:"uuid",label:"Matricule",required: true},
-    {id:"adress",label:"Adress",required: false},
-    {id:"tel",label:"Téléphone",required: false},
+    {id:"adress",label:"Adress",required: false}
 ]
 
 const inputbuilder = listDBfield.map(v=>{
