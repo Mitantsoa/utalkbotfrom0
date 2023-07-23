@@ -31,7 +31,7 @@ app.post('/interactions', async function (req, res) {
     logger("request type = "+ type)
     logger("InteractionType.PING = " + InteractionType.PING)
     logger("user =" + req.user)
-    console.log('member',member.user.username)
+    console.log('member',member)
     const username = member.user.username
     /**
      * Handle verification requests
@@ -86,7 +86,7 @@ function x() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             const data = {
-                type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
                 "data": {
                     "tts": false,
                     "content": "this is from await",
