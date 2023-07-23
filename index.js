@@ -79,6 +79,7 @@ app.post('/interactions', async function (req, res) {
                 }, 5000);
 
                 // Send a message into the channel where command was triggered from
+                logger(m)
                 res.send(m);
 
             }catch (e) {
