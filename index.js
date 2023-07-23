@@ -156,5 +156,5 @@ async function x(editurl,createdurl) {
     logger("createdurl =" + createdurl)
     await axios.post(createdurl,dataModal)
         .then(data => console.log("Modal open"))
-        .catch(e => console.log("there is error"),e)
+        .catch(e => console.log("there is error",e))
 }
