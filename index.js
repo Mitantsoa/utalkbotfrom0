@@ -131,7 +131,7 @@ async function x(editurl,createdurl) {
             // content:"to modal",
             title:"my modal awaited",
             custom_id:"M001",
-            "allowed_mentions": { "parse": [] },
+            // "allowed_mentions": { "parse": [] },
             "components": [
                 {
                     "type": 1,
