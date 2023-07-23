@@ -103,8 +103,24 @@ async function x(editurl,createdurl) {
     // });
     const data ={
             "tts": false,
-            "content": "this is from await",
-            "embeds": [],
+            "content": "Admin action allowed :",
+            "embeds": [
+                {
+                    "title": "Bouton de configuration",
+                    "description": "Uniquement authorise pour le superviseur",
+                    "color": 5814783,
+                    "fields": [
+                        {
+                            "name": "Add user",
+                            "value": "Ajouter un agent avec son **/nom, matricule, etc..**."
+                        },
+                        {
+                            "name": "Add login",
+                            "value": "Ajouter un login utilser avec le softphone avec son **/numéro**."
+                        }
+                    ]
+                }
+            ],
             "allowed_mentions": { "parse": [] },
             "components": [
                 {
