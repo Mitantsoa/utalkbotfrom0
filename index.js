@@ -41,7 +41,6 @@ app.post('/interactions', async function (req, res) {
 
     // const editurl = `https://discord.com/api/webhooks/${application_id}/${token}/messages/@original`
     const editurl = "https://discord.com/api/webhooks/1094067986412863508/aW50ZXJhY3Rpb246MTEzMjU0Nzk3MDU1NDkzNzM1NjpqVHY5QWRhQUdGTHJaNGlLSDlZS1FGTkd2UW16c0tRTkNDMDNBbWt3RDRNVDF0Z1RUdjhEcDVTbUlnYUJzQ2w1YXZ3V0NmeHBROFJsNXlTTlltb3hZSTNSTjV2aEgyZFFHNFViN1AxRG1NeWpyV3lJbXhTRTVSb3pRdE0yTm5ZWA/messages/@original"
-    logger("editurl =" + editurl)
     /**
      * Handle verification requests
      */
@@ -99,51 +98,51 @@ app.listen(PORT, () => {
 });
 
 
-function x() {
-    return new Promise((resolve, reject) => {
-        setTimeout(async (editurl) => {
-
-            const data = {
-                content:"this is to update",
+async function x(editurl) {
+    // return new Promise((resolve, reject,) => {
+    //     // setTimeout(async (editurl) => {
+    //     //     resolve(data);
+    //     // },5000);
+    // });
+    const data = {
+        content:"this is to update",
+        "components": [
+            {
+                "type": 1,
                 "components": [
                     {
-                        "type": 1,
-                        "components": [
-                            {
-                                "type": 2,
-                                "label": "Click me!",
-                                "style": 1,
-                                "custom_id": "click_one"
-                            }
-                        ]
+                        "type": 2,
+                        "label": "Click me!",
+                        "style": 1,
+                        "custom_id": "click_one"
                     }
                 ]
-                };
-            // const data = {
-            //     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-            //     "data": {
-            //         "tts": false,
-            //         "content": "this is from await",
-            //         "embeds": [],
-            //         "allowed_mentions": { "parse": [] },
-            //         "components": [
-            //             {
-            //                 "type": 1,
-            //                 "components": [
-            //                     {
-            //                         "type": 2,
-            //                         "label": "Click me!",
-            //                         "style": 1,
-            //                         "custom_id": "click_one"
-            //                     }
-            //                 ]
-            //             }
-            //         ]
-            //     }};
-            await axios.patch(editurl,data)
-                .then(data => console.log("axios response:",data.data))
-                .catch(e => console.log("axios error:",e.data,e.request))
-            resolve(data);
-        },5000);
-    });
+            }
+        ]
+    };
+    // const data = {
+    //     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+    //     "data": {
+    //         "tts": false,
+    //         "content": "this is from await",
+    //         "embeds": [],
+    //         "allowed_mentions": { "parse": [] },
+    //         "components": [
+    //             {
+    //                 "type": 1,
+    //                 "components": [
+    //                     {
+    //                         "type": 2,
+    //                         "label": "Click me!",
+    //                         "style": 1,
+    //                         "custom_id": "click_one"
+    //                     }
+    //                 ]
+    //             }
+    //         ]
+    //     }};
+    logger("editurl =" + editurl)
+    await axios.patch(editurl,data)
+        .then(data => console.log("axios response:",data.data))
+        .catch(e => console.log("axios error:",e.data,e.request))
 }
