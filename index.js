@@ -52,8 +52,9 @@ app.post('/interactions', async function (req, res) {
         if (name === 'ping') {
             logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE);
 
-            await setTimeout(function(){
+            const m = await setTimeout(function(){
                 logger("wait 5")
+                return "waited"
             }, 5000);
 
             // Send a message into the channel where command was triggered from
@@ -61,7 +62,7 @@ app.post('/interactions', async function (req, res) {
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
                 "data": {
                     "tts": false,
-                    "content": "Congrats on sending your command!",
+                    "content": m,
                     "embeds": [],
                     "allowed_mentions": { "parse": [] },
                     "components": [
