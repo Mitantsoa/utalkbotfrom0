@@ -79,14 +79,14 @@ app.post('/interactions', async function (req, res) {
             logger("command :"+name+", does not exist")
         }
     }else{
-        const { custom_id } = data;
+        const { custom_id, components } = data;
         console.log("data :",data)
         try{
-            const resp = commandClass[custom_id]()
+            const resp = commandClass[custom_id](components)
             console.log(resp)
             res.send(resp)
         }catch (e) {
-            logger("command :"+name+", does not exist")
+            logger("Custom_id :"+custom_id+", does not exist")
         }
     }
 });

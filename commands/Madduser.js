@@ -3,8 +3,9 @@ const {InteractionResponseType} = require("discord-interactions");
 
 
 const name = "MaddUser";
-const action = ()=>{
-    logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.MODAL);
+const action = (comp)=>{
+    console.log("comp[0].components",comp[0].components)
+    // logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.MODAL);
     try {
         // Send a message into the channel where command was triggered from
         const data = {
