@@ -24,7 +24,7 @@ async function fetch(sql){
 async function insert(sql,value){
     try{
         let data = await con.promise().query(sql,value);
-        return data[0]
+        return data
     }catch (e) {
         throw e
     }

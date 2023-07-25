@@ -3,9 +3,9 @@ const {InteractionResponseType} = require("discord-interactions");
 
 
 const listDBfield =[
+    {id:"uuid",label:"Matricule",required: true},
     {id:"username",label:"Nom",required:true},
     {id:"firstname",label:"Prénom",required: true},
-    {id:"uuid",label:"Matricule",required: true},
     {id:"adress",label:"Adress",required: false},
     {id:"tel",label:"Téléphone",required: false},
 ]
