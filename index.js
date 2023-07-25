@@ -69,7 +69,7 @@ app.post('/interactions', async function (req, res) {
      */
     if (type === InteractionType.APPLICATION_COMMAND) {
         const { name } = data;
-        logger("name = "+name)
+        logger("Data = "+data)
         try{
             const resp = commandClass[name]()
             console.log(resp)
@@ -78,6 +78,17 @@ app.post('/interactions', async function (req, res) {
             logger("command :"+name+", does not exist")
         }
 
+    }
+    if (type === InteractionType.MODAL_SUBMIT){
+        const { name } = data;
+        logger("name = "+name)
+        try{
+            const resp = commandClass[name]()
+            console.log(resp)
+            res.send(resp)
+        }catch (e) {
+            logger("command :"+name+", does not exist")
+        }
     }
 });
 

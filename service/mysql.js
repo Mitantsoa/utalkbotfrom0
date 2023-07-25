@@ -12,14 +12,23 @@ const con = Mysql.createConnection({
     port:process.env.PORT
 });
 async function fetch(sql){
-    con.connect(function (err){
-        if(err) throw err;
-        logger("fetching data");
-        con.query(sql, function (err, result) {
-            if (err) throw err;
-            return result;
-        });
-    })
+    try{
+        let data = await con.promise().query(sql);
+        return data[0]
+    }catch (e) {
+        throw e
+    }
+
+}
+
+async function insert(sql,value){
+    try{
+        let data = await con.promise().query(sql,value);
+        return data[0]
+    }catch (e) {
+        throw e
+    }
+
 }
 
 async function createtable(data){
@@ -35,15 +44,9 @@ async function createtable(data){
 }
 
 async function selectall(){
-    con.connect(function (err){
-        if(err) throw err;
-        const sql = "SELECT * FROM `datingcdrdetails`;";
-        con.query(sql, function (err, result) {
-            if (err) throw err;
-            logger(result);
-            return result;
-        });
-    })
+    const sql = "SELECT count(*) FROM `agent`;";
+    let data = await con.promise().query(sql);
+    return data[0]
 }
 
-module.exports = {fetch}
+module.exports = {fetch,insert}

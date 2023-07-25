@@ -1,4 +1,4 @@
-const {fetch} = require('../service/mysql.js');
+const {fetch,insert} = require('../service/mysql.js');
 
 async function findUser(username){
     // const sql = 'SELECT * FROM `agent` where `agentdiscusername` = '+username+')';
@@ -6,4 +6,8 @@ async function findUser(username){
     return await fetch(sql);
 }
 
-module.exports = {findUser}
+async function adduser(value){
+    const sql = 'INSERT INTO `agent` VALUES (?,?,?,?)';
+    return await insert(sql,value);
+}
+module.exports = {findUser,adduser}
