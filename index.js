@@ -81,7 +81,7 @@ app.post('/interactions', async function (req, res) {
     }
     if (type === InteractionType.MODAL_SUBMIT){
         const { name } = data;
-        logger("data = "+data)
+        console.log("data :",data)
         try{
             const resp = commandClass[name]()
             console.log(resp)
@@ -93,7 +93,7 @@ app.post('/interactions', async function (req, res) {
 
     if (type === InteractionType.MESSAGE_COMPONENT){
         const { name } = data;
-        logger("data = "+data)
+        console.log("data :",data)
         try{
             const resp = commandClass[name]()
             console.log(resp)
