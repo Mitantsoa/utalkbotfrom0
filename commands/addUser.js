@@ -28,7 +28,7 @@ const inputbuilder = listDBfield.map(v=>{
 
 console.log(inputbuilder)
 
-const name = "useradd";
+const name = "add_user";
 const action = ()=>{
     logger("InteractionResponseType.MODAL= "+ InteractionResponseType.MODAL);
     try {
