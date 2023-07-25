@@ -4,7 +4,10 @@ const {InteractionResponseType} = require("discord-interactions");
 
 const name = "cool_modal";
 const action = (comp)=>{
-    console.log("comp[0].components",comp[0].components)
+    const values = comp.map((v)=>{
+        return v.components.value
+    })
+    console.log("Values :",values)
     // logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.MODAL);
     try {
         // Send a message into the channel where command was triggered from
