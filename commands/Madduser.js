@@ -2,7 +2,7 @@ const {logger} = require("../service/utils");
 const {InteractionResponseType} = require("discord-interactions");
 
 
-const name = "MaddUser";
+const name = "cool_modal";
 const action = (comp)=>{
     console.log("comp[0].components",comp[0].components)
     // logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.MODAL);
