@@ -2,7 +2,7 @@ const {logger,createInterResp} = require("../service/utils");
 const {InteractionResponseType} = require("discord-interactions");
 const {findAll} = require('../repository/repoAgent')
 
-const name = "startProd";
+const name = "clientstart-agentUID";
 const action = async ()=>{
 
     try {
@@ -12,8 +12,7 @@ const action = async ()=>{
             return {
                 "label": v.Agentuid,
                 "value": v.Agentuid,
-                "description": v.Agentfirstname +"-"+v.Agentlastname,
-                "disabled":false
+                "description": v.Agentfirstname +"-"+v.Agentlastname
             };
         })
 
@@ -37,7 +36,7 @@ const action = async ()=>{
                         "components": [
                             {
                                 "type": 3,
-                                "custom_id": "clientstart-agentUID",
+                                "custom_id": "agentUID",
                                 "options":options,
                                 "placeholder": "---",
                                 "min_values": 1,
