@@ -4,7 +4,6 @@ config;
 // const fetch = require('node-fetch');
 const { verifyKey, InteractionResponseType} = require('discord-interactions');
 const fs = require("fs");
-const {editUrl,createdUrl} = require("./constant.js")
 const axios = require("axios");
 
 function VerifyDiscordRequest(clientKey) {
@@ -76,15 +75,17 @@ function logger(text){
 
 async function editMessage(msg){
     // updating loading message
-    await axios.patch(editUrl,msg)
+    const url = process.env._editUrl;
+    await axios.patch(url,msg)
         .then(data => console.log("axios response: success"))
         .catch(e => console.log("axios error: error",e.response.data))
 }
 
 async function createInterResp(msg){
     // create interaction response
-    logger(createdUrl);
-    await axios.post(createdUrl,msg)
+    const url = process.env._createdUrl;
+    logger(url);
+    await axios.post(url,msg)
         .then(data => console.log("response sent"))
         .catch(e => console.log("there is error",e))
 }
