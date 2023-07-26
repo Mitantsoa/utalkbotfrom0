@@ -15,7 +15,7 @@ const action = async (comp)=>{
         const values = comp.map((v)=>{
             return v.components[0].value
         })
-        // console.log("Values :",values)
+        console.log("Values :",values)
         const dbresp = await adduser(values)
         const insertId = dbresp[0].insertId
         const newUser = await findUser(insertId)
