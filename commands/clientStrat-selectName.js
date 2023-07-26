@@ -1,4 +1,4 @@
-const {logger,createInterResp} = require("../service/utils");
+const {logger,createInterResp,editMessage} = require("../service/utils");
 const {InteractionResponseType} = require("discord-interactions");
 const {findAll} = require('../repository/repoAgent')
 
@@ -48,7 +48,7 @@ const action = async ()=>{
                 ]
             }
         };
-        await createInterResp(data)
+        await editMessage(data)
         // return data;
 
     }catch (e) {
