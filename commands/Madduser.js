@@ -15,25 +15,18 @@ const action = async (comp)=>{
         const values = comp.map((v)=>{
             return v.components[0].value
         })
-        console.log("Values :",values)
-        // const dbresp = await adduser(values)
-        // const insertId = dbresp[0].insertId
-        // const newUser = await findUser(insertId)
+        // console.log("Values :",values)
+        const dbresp = await adduser(values)
+        const insertId = dbresp[0].insertId
+        const newUser = await findUser(insertId)
         // console.log("newUser",newUser)
 
-        const embedsFields = [
-               { name: 'idAgent', value: 20 },
-           { name: 'Agentuid', value: 'U0032' },
-           { name: 'Agentfirstname', value: 'Test2' },
-           { name: 'Agentlastname', value: 'test2' },
-           { name: 'Agentadress', value: 'test2' },
-           { name: 'Agenttel', value: 'test2' }
-         ]
-        // for (const i in newUser){
-        //     console.log("newUser i:",i)
-        //     embedsFields.push({"name": i,"value": newUser[i]})
-        // }
-        console.log("embedsFields :",embedsFields)
+        const embedsFields = []
+        for (const i in newUser){
+            console.log("newUser i:",i)
+            embedsFields.push({"name": i,"value": newUser[i]})
+        }
+        // console.log("embedsFields :",embedsFields)
 
         const data = {
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -45,7 +38,7 @@ const action = async (comp)=>{
                         "title": "User Created",
                         "description": "Uniquement authorise pour le superviseur",
                         "color": 5814783,
-                        "fields": []
+                        "fields": embedsFields
                     }
                 ],
                 "allowed_mentions": { "parse": [] },
