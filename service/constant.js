@@ -1,3 +1,10 @@
+
 let editUrl = ""
 let createdUrl = ""
-module.exports = {editUrl,createdUrl}
+
+function setConstant(req){
+    editUrl = req.editUrl;
+    createdUrl = req.createdUrl;
+}
+
+module.exports = {editUrl,createdUrl,setConstant}

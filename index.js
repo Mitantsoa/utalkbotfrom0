@@ -12,7 +12,7 @@ const {
 } =require('discord-interactions')
 const { VerifyDiscordRequest, getRandomEmoji, DiscordRequest,logger } = require('./service/utils.js');
 
-let {editUrl,createdUrl} = require('./service/constant')
+let {setConstant} = require('./service/constant')
 
 // Commands loading
 var normalizedPath = require("path").join(__dirname, "commands");
@@ -56,8 +56,9 @@ app.post('/interactions', async function (req, res) {
     logger("AppId =" + application_id)
     logger("Type =" + type)
 
-    editUrl = `https://discord.com/api/webhooks/${application_id}/${token}/messages/@original`
-    createdUrl = `https://discord.com/api/interactions/${id}/${token}/callback`;
+    const editUrl = `https://discord.com/api/webhooks/${application_id}/${token}/messages/@original`;
+    const createdUrl = `https://discord.com/api/interactions/${id}/${token}/callback`;
+    setConstant({"editUrl":editUrl,"createdUrl":createdUrl})
 
     /**
      * Handle verification requests
