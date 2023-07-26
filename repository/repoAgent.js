@@ -1,8 +1,8 @@
 const {fetch,insert} = require('../service/mysql.js');
 
-async function findUser(username){
+async function findUser(id){
     // const sql = 'SELECT * FROM `agent` where `agentdiscusername` = '+username+')';
-    const sql = `SELECT * FROM 'Agent' WHERE 'idAgent' = ${username}`;
+    const sql = `SELECT * FROM 'Agent' WHERE 'idAgent' = ${id}`;
     return await fetch(sql);
 }
 
