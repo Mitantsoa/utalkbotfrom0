@@ -2,7 +2,7 @@ const {fetch,insert} = require('../service/mysql.js');
 
 async function findUser(id){
     // const sql = 'SELECT * FROM `agent` where `agentdiscusername` = '+username+')';
-    const sql = `SELECT * FROM login WHERE loginpost = ${id}`;
+    const sql = `SELECT * FROM login WHERE idlogin = ${id}`;
     const data = await fetch(sql);
     return data[0];
 }
