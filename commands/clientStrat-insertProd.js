@@ -25,26 +25,12 @@ const action = async ()=>{
                 "content": "",
                 "embeds": [
                     {
-                        "title": "Merci de vous identifer parmis la liste",
-                        "description": "Si vous n'est pas dans la liste merci de contacter le superviseur.\n Il est important de ne pas se trompé de nom la production sera **comptabilisé en dépendence**",
+                        "title": "Agent selected",
+                        "description": "",
                         "color": 5814783
                     }
                 ],
-                "components": [
-                    {
-                        "type": 1,
-                        "components": [
-                            {
-                                "type": 3,
-                                "custom_id": "agentUID",
-                                "options":options,
-                                "placeholder": "---",
-                                "min_values": 1,
-                                "max_values": 1
-                            }
-                        ]
-                    }
-                ]
+                "components": []
             }
         };
         await createInterResp(data)

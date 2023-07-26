@@ -13,7 +13,7 @@ const action = async ()=>{
                 "label": v.Agentuid,
                 "value": v.Agentuid,
                 "description": v.Agentfirstname +"-"+v.Agentlastname,
-                "disabled":false
+                "disabled":true
             };
         })
 
