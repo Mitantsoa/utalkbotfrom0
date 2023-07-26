@@ -11,8 +11,8 @@ const action = async (comp)=>{
             return v.components[0].value
         })
         // console.log("Values :",values)
-        const {ResultSetHeader} = await adduser(values)
-        console.log("ResultSetHeader",ResultSetHeader)
+        const dbresp = await adduser(values)
+        console.log("ResultSetHeader",dbresp["ResultSetHeader"])
         const data = {
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             "data": {
