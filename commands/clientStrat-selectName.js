@@ -8,7 +8,7 @@ const action = async ()=>{
     try {
 
         const allagent = await findAll();
-        allagent.map((v,i)=>{
+        const options = allagent.map((v,i)=>{
             return {
                 "label": v.Agentuid,
                 "value": v.Agentuid,
@@ -16,7 +16,7 @@ const action = async ()=>{
             };
         })
 
-        console.log(allagent)
+        console.log(options)
 
         // Send a message into the channel where command was triggered from
         const data = {
@@ -37,17 +37,7 @@ const action = async ()=>{
                             {
                                 "type": 3,
                                 "custom_id": "agentUID",
-                                "options":[
-                                    {
-                                        "label": "Rogue",
-                                        "value": "rogue",
-                                        "description": "Sneak n stab",
-                                        "emoji": {
-                                            "name": "rogue",
-                                            "id": "625891304148303894"
-                                        }
-                                    }
-                                ],
+                                "options":options,
                                 "placeholder": "---",
                                 "min_values": 1,
                                 "max_values": 1
