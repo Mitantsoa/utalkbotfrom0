@@ -21,14 +21,17 @@ const action = async (comp)=>{
         const newUser = await findUser(insertId)
         console.log("newUser",newUser)
 
-        const embedsFields = newUser.forEach((v,i)=>{
-            console.log("newUser V:",v)
+        for (const i in newUser){
             console.log("newUser i:",i)
-            return {
-                "name": i,
-                "value": v
-            }
-        })
+        }
+        // const embedsFields = newUser.forEach((v,i)=>{
+        //     console.log("newUser V:",v)
+        //     console.log("newUser i:",i)
+        //     return {
+        //         "name": i,
+        //         "value": v
+        //     }
+        // })
         console.log("embedsFields :",embedsFields)
         const data = {
                 "tts": false,
