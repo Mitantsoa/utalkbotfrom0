@@ -2,7 +2,7 @@ const {logger} = require("../service/utils");
 const {InteractionResponseType} = require("discord-interactions");
 
 
-const name = "ping2";
+const name = "ping";
 const action = ()=>{
     logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE);
     try {
@@ -11,20 +11,28 @@ const action = ()=>{
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             "data": {
                 "tts": false,
-                "content": "ADMIN :",
+                "content": "Home :",
                 "embeds": [
                     {
                         "title": "Bouton de configuration",
-                        "description": "Uniquement authorise pour le superviseur",
+                        "description": "C'est ici la gestion de la présence",
                         "color": 5814783,
                         "fields": [
                             {
-                                "name": "Add user",
-                                "value": "Ajouter un agent avec son **/nom, matricule, etc..**."
+                                "name": "Début",
+                                "value": "Commencer la production."
                             },
                             {
-                                "name": "Add login",
-                                "value": "Ajouter un login utilser avec le softphone avec son **/numéro**."
+                                "name": "Pause",
+                                "value": "Faire une pause."
+                            },
+                            {
+                                "name": "Retour",
+                                "value": "Reprender après une pause."
+                            },
+                            {
+                                "name": "Fin",
+                                "value": "Términer le shift/production."
                             }
                         ]
                     }
@@ -35,14 +43,24 @@ const action = ()=>{
                     "components": [
                         {
                             "type": 2,
-                            "label": "Add user",
+                            "label": "Début",
                             "style": 1,
-                            "custom_id": "add_user"
+                            "custom_id": "startProd"
                         },{
                             "type": 2,
-                            "label": "Add login",
+                            "label": "Pause",
                             "style": 2,
-                            "custom_id": "add_login"
+                            "custom_id": "stundbyProd"
+                        },{
+                            "type": 2,
+                            "label": "Retour",
+                            "style": 3,
+                            "custom_id": "resumeProd"
+                        },{
+                            "type": 2,
+                            "label": "Fin",
+                            "style": 4,
+                            "custom_id": "stopProd"
                         }
                     ]
                 }]

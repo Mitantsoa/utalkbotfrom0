@@ -11,4 +11,12 @@ async function adduser(value){
     const sql = 'INSERT INTO `Agent`(`Agentuid`,`Agentfirstname`,`Agentlastname`,`Agentadress`,`Agenttel`) VALUES (?,?,?,?,?)';
     return await insert(sql,value);
 }
-module.exports = {findUser,adduser}
+
+async function findAll(){
+    // const sql = 'SELECT * FROM `agent` where `agentdiscusername` = '+username+')';
+    const sql = `SELECT * FROM Agent`;
+    const data = await fetch(sql);
+    console.log("data",data)
+    return data;
+}
+module.exports = {findUser,adduser,findAll}
