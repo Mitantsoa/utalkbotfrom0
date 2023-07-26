@@ -1,8 +1,8 @@
 const {logger,deferedMsg,editMessage,createInterResp} = require("../service/utils");
 const {InteractionResponseType} = require("discord-interactions");
-const {adduser,findUser} = require("../repository/repoAgent.js");
+const {adduser,findUser} = require("../repository/repoLogin.js");
 
-const name = "cool_modal";
+const name = "M_add_login";
 const action = async (comp)=>{
         // logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.MODAL);
     try {
@@ -23,7 +23,7 @@ const action = async (comp)=>{
 
         const embedsFields = []
         for (const i in newUser){
-            console.log("newUser i:",i)
+            // console.log("newUser i:",i)
             embedsFields.push({"name": i,"value": newUser[i]})
         }
         // console.log("embedsFields :",embedsFields)
@@ -35,7 +35,7 @@ const action = async (comp)=>{
                 "content": "",
                 "embeds": [
                     {
-                        "title": "User Created",
+                        "title": "Login Created",
                         "description": "",
                         "color": 5814783,
                         "fields": embedsFields
