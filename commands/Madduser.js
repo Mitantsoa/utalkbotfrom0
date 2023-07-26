@@ -1,18 +1,21 @@
 const {logger} = require("../service/utils");
 const {InteractionResponseType} = require("discord-interactions");
-const {adduser} = require("../repository/repoAgent.js")
+const {adduser,findUser} = require("../repository/repoAgent.js")
 
 const name = "cool_modal";
 const action = async (comp)=>{
         // logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.MODAL);
     try {
         // Send a message into the channel where command was triggered from
+        // collection input text values
         const values = comp.map((v)=>{
             return v.components[0].value
         })
         // console.log("Values :",values)
         const dbresp = await adduser(values)
-        console.log("ResultSetHeader",dbresp[0])
+        const insertId = dbresp[0].insertId
+        const newUser = await findUser(insertId)
+        console.log("newUser",newUser)
         const data = {
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             "data": {
