@@ -36,22 +36,22 @@ const action = async (comp)=>{
         console.log("embedsFields :",embedsFields)
 
         const data = {
-            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-            data:{
-            "tts": false,
-            "content": " ",
-            "embeds": [
-            {
-                "title": "User Created",
-                "description": "Uniquement authorise pour le superviseur",
-                "color": 5814783,
-                "fields": []
+                type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                data:{
+                "tts": false,
+                "content": "test",
+                "embeds": [
+                    {
+                        "title": "User Created",
+                        "description": "Uniquement authorise pour le superviseur",
+                        "color": 5814783,
+                        "fields": []
+                    }
+                ],
+                "allowed_mentions": { "parse": [] },
+                "components": []
             }
-        ],
-            "allowed_mentions": { "parse": [] },
-            "components": []
-        }
-    };
+        };
         // await createInterResp(data)
         return data;
 
