@@ -8,7 +8,7 @@ async function findUser(id){
 }
 
 async function adduser(value){
-    const sql = 'INSERT INTO `login`(`loginpost`,`logindisousername`) VALUES (?,?)';
+    const sql = 'INSERT INTO `login`(`loginpost`,`logindiscousername`) VALUES (?,?)';
     return await insert(sql,value);
 }
 module.exports = {findUser,adduser}
