@@ -83,6 +83,7 @@ async function editMessage(msg){
 
 async function createInterResp(msg){
     // create interaction response
+    logger(createdUrl);
     await axios.post(createdUrl,msg)
         .then(data => console.log("response sent"))
         .catch(e => console.log("there is error",e))
