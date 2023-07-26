@@ -2,8 +2,10 @@ const config = require('dotenv/config');
 const moment = require('moment');
 config;
 // const fetch = require('node-fetch');
-const { verifyKey } = require('discord-interactions');
+const { verifyKey, InteractionResponseType} = require('discord-interactions');
 const fs = require("fs");
+const {editUrl,createdUrl} = require("./constant.js")
+const axios = require("axios");
 
 function VerifyDiscordRequest(clientKey) {
     return function (req, res, buf, encoding) {
@@ -72,4 +74,29 @@ function logger(text){
     return console.log(now,": ",text);
 }
 
-module.exports = {VerifyDiscordRequest,DiscordRequest,InstallGlobalCommands,getRandomEmoji,capitalize,logger}
+async function editMessage(msg){
+    // updating loading message
+    await axios.patch(editUrl,msg)
+        .then(data => console.log("axios response: success"))
+        .catch(e => console.log("axios error: error",e.response.data))
+}
+
+async function createInterResp(msg){
+    // create interaction response
+    await axios.post(createdUrl,msg)
+        .then(data => console.log("response sent"))
+        .catch(e => console.log("there is error",e))
+}
+
+async function deferedMsg(){
+    const msg = {
+        type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
+        "data": {
+            "tts": false,
+            "content": "WIP",
+            "allowed_mentions": { "parse": [] },
+        }};
+    await createInterResp(msg)
+}
+
+module.exports = {VerifyDiscordRequest,DiscordRequest,InstallGlobalCommands,getRandomEmoji,capitalize,logger,editMessage,deferedMsg}
