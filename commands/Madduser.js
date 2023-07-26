@@ -12,7 +12,7 @@ const action = async (comp)=>{
         })
         // console.log("Values :",values)
         const dbresp = await adduser(values)
-        console.log("ResultSetHeader",dbresp["ResultSetHeader"])
+        console.log("ResultSetHeader",dbresp[0])
         const data = {
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             "data": {
