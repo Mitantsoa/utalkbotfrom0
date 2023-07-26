@@ -16,7 +16,7 @@ async function findAll(){
     // const sql = 'SELECT * FROM `agent` where `agentdiscusername` = '+username+')';
     const sql = `SELECT * FROM Agent`;
     const data = await fetch(sql);
-    console.log("data",data)
+    // console.log("data",data)
     return data;
 }
 module.exports = {findUser,adduser,findAll}

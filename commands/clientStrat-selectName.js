@@ -37,7 +37,17 @@ const action = async ()=>{
                             {
                                 "type": 3,
                                 "custom_id": "agentUID",
-                                "options":allagent,
+                                "options":[
+                                    {
+                                        "label": "Rogue",
+                                        "value": "rogue",
+                                        "description": "Sneak n stab",
+                                        "emoji": {
+                                            "name": "rogue",
+                                            "id": "625891304148303894"
+                                        }
+                                    }
+                                ],
                                 "placeholder": "---",
                                 "min_values": 1,
                                 "max_values": 1
