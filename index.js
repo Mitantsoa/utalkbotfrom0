@@ -10,7 +10,7 @@ const {
     MessageComponentTypes,
     ButtonStyleTypes,
 } =require('discord-interactions')
-const { VerifyDiscordRequest, getRandomEmoji, DiscordRequest,logger } = require('./service/utils.js');
+const { VerifyDiscordRequest, getRandomEmoji, DiscordRequest,logger,createInterResp } = require('./service/utils.js');
 
 // Commands loading
 var normalizedPath = require("path").join(__dirname, "commands");
@@ -33,8 +33,6 @@ const PORT = process.env.PORT || 80;
 // Parse request body and verifies incoming requests using discord-interactions package
 app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 
-// Store for in-progress games. In production, you'd want to use a DB
-const activeGames = {};
 const repoAgent = require('./repository/repoAgent.js')
 
 /**
@@ -74,7 +72,8 @@ app.post('/interactions', async function (req, res) {
         try{
             const resp = commandClass[name]()
             console.log(resp)
-            res.send(resp)
+            await createInterResp(resp)
+            // res.send(resp)
         }catch (e) {
             logger("command :"+name+", does not exist")
         }
