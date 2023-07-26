@@ -99,4 +99,4 @@ async function deferedMsg(){
     await createInterResp(msg)
 }
 
-module.exports = {VerifyDiscordRequest,DiscordRequest,InstallGlobalCommands,getRandomEmoji,capitalize,logger,editMessage,deferedMsg}
+module.exports = {VerifyDiscordRequest,DiscordRequest,InstallGlobalCommands,getRandomEmoji,capitalize,logger,editMessage,deferedMsg,createInterResp}

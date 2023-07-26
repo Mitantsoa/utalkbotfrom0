@@ -1,4 +1,4 @@
-const {logger,deferedMsg,editMessage} = require("../service/utils");
+const {logger,deferedMsg,editMessage,createInterResp} = require("../service/utils");
 const {InteractionResponseType} = require("discord-interactions");
 const {adduser,findUser} = require("../repository/repoAgent.js");
 
@@ -9,7 +9,7 @@ const action = async (comp)=>{
         // Send a message into the channel where command was triggered from
 
         // sending deffered message
-        await deferedMsg()
+        // await deferedMsg()
 
         // collection input text values
         const values = comp.map((v)=>{
@@ -44,7 +44,7 @@ const action = async (comp)=>{
                 "allowed_mentions": { "parse": [] },
                 "components": []
             };
-        await editMessage(data)
+        await createInterResp(data)
         return data;
 
     }catch (e) {
