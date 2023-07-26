@@ -1,4 +1,4 @@
-const {logger} = require("../service/utils");
+const {logger,createInterResp} = require("../service/utils");
 const {InteractionResponseType} = require("discord-interactions");
 
 
@@ -29,7 +29,7 @@ const inputbuilder = listDBfield.map(v=>{
 console.log(inputbuilder)
 
 const name = "add_user";
-const action = ()=>{
+const action = async ()=>{
     logger("InteractionResponseType.MODAL= "+ InteractionResponseType.MODAL);
     try {
         // Send a message into the channel where command was triggered from
@@ -62,7 +62,8 @@ const action = ()=>{
                 "components": inputbuilder
             }
         };
-        return data;
+        await createInterResp(data)
+        // return data;
 
     }catch (e) {
         console.log(e)
