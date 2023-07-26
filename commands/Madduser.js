@@ -19,9 +19,9 @@ const action = async (comp)=>{
         const dbresp = await adduser(values)
         const insertId = dbresp[0].insertId
         const newUser = await findUser(insertId)
-        // console.log("newUser",newUser)
+        console.log("newUser",newUser)
 
-        const embedsFields = newUser.map((v,i)=>{
+        const embedsFields = newUser.forEach((v,i)=>{
             console.log("newUser V:",v)
             console.log("newUser i:",i)
             return {
