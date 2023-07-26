@@ -52,8 +52,8 @@ const action = async (comp)=>{
                 "components": []
             }
         };
-        // await createInterResp(data)
-        return data;
+        await createInterResp(data)
+        // return data;
 
     }catch (e) {
         console.log(e)

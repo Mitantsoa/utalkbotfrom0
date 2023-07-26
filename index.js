@@ -83,7 +83,7 @@ app.post('/interactions', async function (req, res) {
         try{
             const resp = commandClass[custom_id](components)
             console.log(resp)
-            res.send(resp)
+            // res.send(resp)
         }catch (e) {
             logger("Custom_id :"+custom_id+", does not exist")
         }
