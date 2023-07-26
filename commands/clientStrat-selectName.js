@@ -2,8 +2,6 @@ const {logger,createInterResp} = require("../service/utils");
 const {InteractionResponseType} = require("discord-interactions");
 const {findAll} = require('../repository/repoAgent')
 
-console.log(inputbuilder)
-
 const name = "startProd";
 const action = async ()=>{
 
