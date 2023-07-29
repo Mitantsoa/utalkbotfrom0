@@ -71,8 +71,9 @@ app.post('/interactions', async function (req, res) {
         const cmdClass = commandClass[name]
         logger("name = "+name)
         try{
+            console.log('cmdClass.deferred:',cmdClass.deferred)
+            console.log('cmdClass.updatePrev:',cmdClass.updatePrev)
             if(cmdClass.deferred && cmdClass.updatePrev) await editdeferedMsg(_editUrl)
-
             if (cmdClass.deferred && !cmdClass.updatePrev) await deferedMsg(_createdUrl)
 
             // await deferedMsg(_createdUrl)
