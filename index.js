@@ -16,15 +16,14 @@ const { VerifyDiscordRequest, getRandomEmoji, DiscordRequest,logger,createInterR
 var normalizedPath = require("path").join(__dirname, "commands");
 let commandClass = {}
 console.log("normalizedPath:",normalizedPath)
-// fs.readdirSync(normalizedPath).forEach(function(file) {
-//
-//     console.log("./commands/" + file)
-//     const body = require(normalizedPath +'/'+ file)
-//     console.log("body" + body)
-//     commandClass[body.name] = body;
-//     console.log("./commands/" + file)
-//
-// });
+fs.readdirSync(normalizedPath).forEach(function(file) {
+
+    const body = require(normalizedPath +'/'+ file)
+    console.log("body" + body)
+    commandClass[body.name] = body;
+    console.log(normalizedPath +"/"+ file)
+
+});
 console.log("commandClass",commandClass)
 // commandClass.AdminCmd()
 

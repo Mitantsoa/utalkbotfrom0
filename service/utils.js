@@ -16,7 +16,6 @@ function VerifyDiscordRequest(clientKey) {
             res.status(401).send('Bad request signature');
             throw new Error('Bad request signature');
         }
-        console.log("-------------")
     };
 }
 
