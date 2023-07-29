@@ -51,7 +51,7 @@ app.post('/interactions', async function (req, res) {
     logger("AppId =" + application_id)
     logger("Type =" + type)
 
-    const _editUrl = `https://discord.com/api/webhooks/${application_id}/${token}/messages/@original`;
+
     const _createdUrl  = `https://discord.com/api/interactions/${id}/${token}/callback`;
 
     /**
@@ -66,21 +66,23 @@ app.post('/interactions', async function (req, res) {
      * See https://discord.com/developers/docs/interactions/application-commands#slash-commands
      */
     // if (type === InteractionType.APPLICATION_COMMAND) {
-        const interIndex = data.name == undefined ? data.custom_id : data.name
+        const interIndex = data.name == undefined ? data.custom_id.split("|")[0] : data.name.split("|")[0]
+        const prevInteractiontoken = data.name == undefined ? data.custom_id.split("|")[1] : data.name.split("|")[1]
         const interComp = data.components
         // const { name } = data;
         const cmdClass = commandClass[interIndex]
         logger("interIndex = "+interIndex)
+        logger("prevInteractiontoken = "+prevInteractiontoken)
         try{
             console.log('cmdClass.deferred:',cmdClass.deferred)
             console.log('cmdClass.updatePrev:',cmdClass.updatePrev)
-            if(cmdClass.deferred && cmdClass.updatePrev) await editdeferedMsg(_editUrl)
-            if (cmdClass.deferred && !cmdClass.updatePrev) await deferedMsg(_createdUrl)
+            if(cmdClass.deferred && cmdClass.updatePrev) await editdeferedMsg(application_id,prevInteractiontoken)
+            if (cmdClass.deferred && !cmdClass.updatePrev) await deferedMsg(_createdUrl,token)
 
             // await deferedMsg(_createdUrl)
-            const resp = await  cmdClass.action(interComp)
+            const resp = await  cmdClass.action({"interComp":interComp,"token":token})
             // console.log(resp)
-            if (cmdClass.deferred || cmdClass.updatePrev) await editMessage(resp,_editUrl)
+            if (cmdClass.updatePrev) await editMessage(resp,application_id,prevInteractiontoken)
             else await createInterResp(resp,_createdUrl)
             // res.send(resp)
         }catch (e) {

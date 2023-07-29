@@ -73,9 +73,10 @@ function logger(text){
     return console.log(now,": ",text);
 }
 
-async function editMessage(msg,url){
+async function editMessage(msg,application_id,token){
     // updating loading message
     // const url = process.env._editUrl;
+    const url = `https://discord.com/api/webhooks/${application_id}/${token}/messages/@original`;
     msg = msg.data
     logger("edit:"+url);
     await axios.patch(url,msg)
@@ -102,7 +103,7 @@ async function deferedMsg(url){
     await createInterResp(msg,url)
 }
 
-async function editdeferedMsg(url){
+async function editdeferedMsg(application_id,token){
     const msg = {
         type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
         "data": {
@@ -110,7 +111,7 @@ async function editdeferedMsg(url){
             "content": "WIP",
             "allowed_mentions": { "parse": [] },
         }};
-    await editMessage(msg,url)
+    await editMessage(msg,application_id,token)
 }
 
 module.exports = {VerifyDiscordRequest,DiscordRequest,InstallGlobalCommands,getRandomEmoji,capitalize,logger,editMessage,deferedMsg,createInterResp,editdeferedMsg}
