@@ -3,6 +3,8 @@ const {InteractionResponseType} = require("discord-interactions");
 
 
 const name = "ping";
+const updatePrev = false;
+const deferred = false;
 const action = ()=>{
     logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE);
     try {
