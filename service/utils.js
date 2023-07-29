@@ -76,6 +76,7 @@ function logger(text){
 async function editMessage(msg,url){
     // updating loading message
     // const url = process.env._editUrl;
+    msg = msg.data
     await axios.patch(url,msg)
         .then(data => console.log("axios response: success"))
         .catch(e => console.log("axios error: error",e.response.data))
