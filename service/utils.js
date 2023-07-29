@@ -82,7 +82,7 @@ async function editMessage(msg,application_id,token){
     logger("edit:"+url);
     await axios.patch(url,msg)
         .then(data => console.log("axios response: success"))
-        .catch(e => console.log("axios error: error",e.response))
+        .catch(e => console.log("axios error: error",e.response.data))
 }
 
 async function createInterResp(msg,url){
@@ -90,7 +90,7 @@ async function createInterResp(msg,url){
     logger("create"+url);
     await axios.post(url,msg)
         .then(data => console.log("response sent"))
-        .catch(e => console.log("there is error",e))
+        .catch(e => console.log("there is error",e.response.data))
 }
 
 async function deferedMsg(url){
