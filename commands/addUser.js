@@ -57,13 +57,13 @@ const action = async ()=>{
             //     ]
             // }
             data:{
-                "title": "My Cool Modal",
+                "title": "Ajouter Agent",
                 "custom_id": "cool_modal",
                 "components": inputbuilder
             }
         };
-        await createInterResp(data)
-        // return data;
+        // await createInterResp(data)
+        return data;
 
     }catch (e) {
         console.log(e)

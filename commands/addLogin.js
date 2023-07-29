@@ -54,13 +54,13 @@ const action = async ()=>{
             //     ]
             // }
             data:{
-                "title": "Add Login",
+                "title": "Ajouter Login",
                 "custom_id": "M_add_login",
                 "components": inputbuilder
             }
         };
-        await createInterResp(data)
-        // return data;
+        // await createInterResp(data)
+        return data;
 
     }catch (e) {
         console.log(e)

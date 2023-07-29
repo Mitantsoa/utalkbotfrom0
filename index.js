@@ -52,8 +52,8 @@ app.post('/interactions', async function (req, res) {
     logger("AppId =" + application_id)
     logger("Type =" + type)
 
-    process.env["_editUrl"] = `https://discord.com/api/webhooks/${application_id}/${token}/messages/@original`;
-    process.env["_createdUrl"]  = `https://discord.com/api/interactions/${id}/${token}/callback`;
+    const _editUrl = `https://discord.com/api/webhooks/${application_id}/${token}/messages/@original`;
+    const _createdUrl  = `https://discord.com/api/interactions/${id}/${token}/callback`;
 
     /**
      * Handle verification requests
@@ -70,9 +70,9 @@ app.post('/interactions', async function (req, res) {
         const { name } = data;
         logger("name = "+name)
         try{
-            const resp = commandClass[name]()
-            console.log(resp)
-            await createInterResp(resp)
+            const resp = await  commandClass[name]()
+            // console.log(resp)
+            await createInterResp(resp,_createdUrl)
             // res.send(resp)
         }catch (e) {
             logger("command :"+name+", does not exist")
@@ -81,9 +81,9 @@ app.post('/interactions', async function (req, res) {
         const { custom_id, components } = data;
         console.log("data :",data)
         try{
-            const resp = commandClass[custom_id](components)
+            const resp = await commandClass[custom_id](components)
             console.log(resp)
-            // res.send(resp)
+            await createInterResp(resp,_createdUrl)
         }catch (e) {
             logger("Custom_id :"+custom_id+", does not exist")
         }

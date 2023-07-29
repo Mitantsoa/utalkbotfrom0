@@ -73,17 +73,16 @@ function logger(text){
     return console.log(now,": ",text);
 }
 
-async function editMessage(msg){
+async function editMessage(msg,url){
     // updating loading message
-    const url = process.env._editUrl;
+    // const url = process.env._editUrl;
     await axios.patch(url,msg)
         .then(data => console.log("axios response: success"))
         .catch(e => console.log("axios error: error",e.response.data))
 }
 
-async function createInterResp(msg){
+async function createInterResp(msg,url){
     // create interaction response
-    const url = process.env._createdUrl;
     // logger(url);
     await axios.post(url,msg)
         .then(data => console.log("response sent"))
