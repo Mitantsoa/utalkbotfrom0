@@ -23,7 +23,7 @@ fs.readdirSync(normalizedPath).forEach(function(file) {
     console.log("./commands/" + file)
 
 });
-console.log(commandClass)
+console.log("commandClass",commandClass)
 // commandClass.AdminCmd()
 
 // Create an express app
