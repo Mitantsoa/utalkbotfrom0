@@ -5,8 +5,8 @@ async function findtoken(id,appid){
     const sql = `SELECT interactiontoken FROM token WHERE interactionid = '${id}' and applicationid = '${appid}'`;
     console.log("find token sql:\n"+sql)
     const data = await fetch(sql);
-    console.log("find token sql respon:\n"+data[0])
-    console.log("find token sql respon:\n"+data)
+    console.log("find token sql respon:\n"+data[0].toString())
+    console.log("find token sql respon:\n"+data.toString())
     return data[0];
 }
 
