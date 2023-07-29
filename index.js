@@ -50,6 +50,7 @@ app.post('/interactions', async function (req, res) {
     logger("user =" + username)
     logger("AppId =" + application_id)
     logger("Type =" + type)
+    logger("id =" + id)
 
 
     const _createdUrl  = `https://discord.com/api/interactions/${id}/${token}/callback`;
@@ -81,7 +82,7 @@ app.post('/interactions', async function (req, res) {
                 // store current interaction and token
                 await addtoken([id,application_id,token])
                 // fetch previous token of previous interaction
-                if(cmdClass.updatePrev) prevInteractiontoken = await findtoken(id,application_id)
+                if(cmdClass.updatePrev) prevInteractiontoken = await findtoken(prevInteractionId,application_id)
             }catch (e){
                 logger("token sql error: \n"+e)
             }
@@ -94,7 +95,7 @@ app.post('/interactions', async function (req, res) {
             if (cmdClass.deferred && !cmdClass.updatePrev) await deferedMsg(_createdUrl,token)
 
             // await deferedMsg(_createdUrl)
-            const resp = await  cmdClass.action({"interComp":interComp,"prevInteractionId":id})
+            const resp = await  cmdClass.action({"interComp":interComp,"interactionid":id})
 
             // check if response need be to updated on interaction
             if (cmdClass.updatePrev) await editMessage(resp,application_id,prevInteractiontoken)
