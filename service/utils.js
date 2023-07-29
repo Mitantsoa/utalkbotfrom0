@@ -81,7 +81,7 @@ async function editMessage(msg,application_id,token){
     logger("edit:"+url);
     await axios.patch(url,msg)
         .then(data => console.log("axios response: success"))
-        .catch(e => console.log("axios error: error",e.response.data))
+        .catch(e => console.log("axios error: error",e.response))
 }
 
 async function createInterResp(msg,url){
