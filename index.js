@@ -72,14 +72,14 @@ app.post('/interactions', async function (req, res) {
         try{
             console.log('cmdClass.deferred:',cmdClass.deferred)
             console.log('cmdClass.updatePrev:',cmdClass.updatePrev)
-            // if(cmdClass.deferred && cmdClass.updatePrev) await editdeferedMsg(_editUrl)
-            // if (cmdClass.deferred && !cmdClass.updatePrev) await deferedMsg(_createdUrl)
+            if(cmdClass.deferred && cmdClass.updatePrev) await editdeferedMsg(_editUrl)
+            if (cmdClass.deferred && !cmdClass.updatePrev) await deferedMsg(_createdUrl)
 
             // await deferedMsg(_createdUrl)
             const resp = await  cmdClass.action()
             // console.log(resp)
-            // if (cmdClass.deferred || !cmdClass.updatePrev) await editMessage(resp,_editUrl)
-            // else await editMessage(resp,_createdUrl)
+            if (cmdClass.deferred || !cmdClass.updatePrev) await editMessage(resp,_editUrl)
+            else await editMessage(resp,_createdUrl)
             // res.send(resp)
         }catch (e) {
             logger("command :"+name+", does not exist")
