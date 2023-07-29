@@ -96,7 +96,7 @@ app.post('/interactions', async function (req, res) {
             else await createInterResp(resp,_createdUrl)
             // res.send(resp)
         }catch (e) {
-            logger("command :"+name+", does not exist")
+            logger("command :"+interIndex+", does not exist")
         }
     // }else{
     //     const { custom_id, components } = data;
