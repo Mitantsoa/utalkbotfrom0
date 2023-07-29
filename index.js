@@ -82,7 +82,7 @@ app.post('/interactions', async function (req, res) {
                 // store current interaction and token
                 await addtoken([id,application_id,token])
                 // fetch previous token of previous interaction
-                if(cmdClass.updatePrev) prevInteractiontoken = await findtoken(prevInteractionId,application_id)
+                if(cmdClass.updatePrev) prevInteractiontoken = await findtoken(prevInteractionId,application_id) ; prevInteractiontoken = prevInteractiontoken["interactiontoken"];
             }catch (e){
                 logger("token sql error: \n"+e)
             }
