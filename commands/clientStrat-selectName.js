@@ -6,7 +6,7 @@ const updatePrev = false;
 const deferred = true;
 const action = async ({prevInteractionId})=>{
     try {
-        console.log('=========token',token)
+        // console.log('=========token',prevInteractionId)
         const allagent = await findAll();
         const options = allagent.map((v,i)=>{
             return {
