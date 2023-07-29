@@ -37,7 +37,7 @@ const action = async ({interactionid})=>{
                         "components": [
                             {
                                 "type": 3,
-                                "custom_id": "clientstart-agentUID|"+prevInteractionId,
+                                "custom_id": "clientstart-agentUID|"+interactionid,
                                 "options":options,
                                 "placeholder": "---",
                                 "min_values": 1,
