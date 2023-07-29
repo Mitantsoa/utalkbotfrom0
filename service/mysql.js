@@ -14,6 +14,7 @@ const con = Mysql.createConnection({
 async function fetch(sql){
     try{
         let data = await con.promise().query(sql);
+        console.log("====== mysql data",data)
         return data[0]
     }catch (e) {
         throw e
