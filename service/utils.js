@@ -7,7 +7,6 @@ const fs = require("fs");
 const axios = require("axios");
 
 function VerifyDiscordRequest(clientKey) {
-    console.log("-------------")
     return function (req, res, buf, encoding) {
         const signature = req.get('X-Signature-Ed25519');
         const timestamp = req.get('X-Signature-Timestamp');
@@ -17,6 +16,7 @@ function VerifyDiscordRequest(clientKey) {
             res.status(401).send('Bad request signature');
             throw new Error('Bad request signature');
         }
+        console.log("-------------")
     };
 }
 
