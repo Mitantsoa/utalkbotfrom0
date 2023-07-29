@@ -1,4 +1,3 @@
-const {logger,deferedMsg,editMessage,createInterResp} = require("../service/utils");
 const {InteractionResponseType} = require("discord-interactions");
 const {adduser,findUser} = require("../repository/repoLogin.js");
 
