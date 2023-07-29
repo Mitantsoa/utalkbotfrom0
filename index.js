@@ -72,8 +72,7 @@ app.post('/interactions', async function (req, res) {
         let prevInteractiontoken = ""
         // const { name } = data;
         const cmdClass = commandClass[interIndex]
-        logger("interIndex = "+interIndex)
-        logger("prevInteractiontoken = "+prevInteractiontoken)
+
         try{
             logger('cmdClass.deferred:'+cmdClass.deferred)
             logger('cmdClass.updatePrev:'+cmdClass.updatePrev)
@@ -82,6 +81,9 @@ app.post('/interactions', async function (req, res) {
             await addtoken([id,application_id,token])
             // fetch previous token of previous interaction
             if(cmdClass.updatePrev) prevInteractiontoken = await findtoken(id,application_id)
+
+            logger("interIndex = "+interIndex)
+            logger("prevInteractiontoken = "+prevInteractiontoken)
 
             // check if deferred si required
             if(cmdClass.deferred && cmdClass.updatePrev) await editdeferedMsg(application_id,prevInteractiontoken)
@@ -96,7 +98,7 @@ app.post('/interactions', async function (req, res) {
             else await createInterResp(resp,_createdUrl)
             // res.send(resp)
         }catch (e) {
-            logger("command :"+interIndex+", does not exist")
+            logger("command :"+interIndex+" does not exist")
         }
     // }else{
     //     const { custom_id, components } = data;
