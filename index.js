@@ -78,7 +78,7 @@ app.post('/interactions', async function (req, res) {
             // await deferedMsg(_createdUrl)
             const resp = await  cmdClass.action()
             // console.log(resp)
-            if (cmdClass.deferred || !cmdClass.updatePrev) await editMessage(resp,_editUrl)
+            if (cmdClass.deferred || cmdClass.updatePrev) await editMessage(resp,_editUrl)
             else await createInterResp(resp,_createdUrl)
             // res.send(resp)
         }catch (e) {
