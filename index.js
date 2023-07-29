@@ -65,10 +65,12 @@ app.post('/interactions', async function (req, res) {
      * Handle slash command requests
      * See https://discord.com/developers/docs/interactions/application-commands#slash-commands
      */
-    if (type === InteractionType.APPLICATION_COMMAND) {
-        const { name } = data;
-        const cmdClass = commandClass[name]
-        logger("name = "+name)
+    // if (type === InteractionType.APPLICATION_COMMAND) {
+        const interIndex = data.name == undefined ? data.custom_id : data.name
+        const interComp = data.components
+        // const { name } = data;
+        const cmdClass = commandClass[interIndex]
+        logger("interIndex = "+interIndex)
         try{
             console.log('cmdClass.deferred:',cmdClass.deferred)
             console.log('cmdClass.updatePrev:',cmdClass.updatePrev)
@@ -76,7 +78,7 @@ app.post('/interactions', async function (req, res) {
             if (cmdClass.deferred && !cmdClass.updatePrev) await deferedMsg(_createdUrl)
 
             // await deferedMsg(_createdUrl)
-            const resp = await  cmdClass.action()
+            const resp = await  cmdClass.action(interComp)
             // console.log(resp)
             if (cmdClass.deferred || cmdClass.updatePrev) await editMessage(resp,_editUrl)
             else await createInterResp(resp,_createdUrl)
@@ -84,18 +86,18 @@ app.post('/interactions', async function (req, res) {
         }catch (e) {
             logger("command :"+name+", does not exist")
         }
-    }else{
-        const { custom_id, components } = data;
-        console.log("data :",data)
-        const cmdClass = commandClass[custom_id]
-        try{
-            const resp = await cmdClass.action(components)
-            console.log(resp)
-            await createInterResp(resp,_createdUrl)
-        }catch (e) {
-            logger("Custom_id :"+custom_id+", does not exist")
-        }
-    }
+    // }else{
+    //     const { custom_id, components } = data;
+    //     console.log("data :",data)
+    //     const cmdClass = commandClass[custom_id]
+    //     try{
+    //         const resp = await cmdClass.action(components)
+    //         console.log(resp)
+    //         await createInterResp(resp,_createdUrl)
+    //     }catch (e) {
+    //         logger("Custom_id :"+custom_id+", does not exist")
+    //     }
+    // }
 });
 
 app.post('/',async function(req, res){
