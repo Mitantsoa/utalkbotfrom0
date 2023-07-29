@@ -2,8 +2,9 @@ const {InteractionResponseType} = require("discord-interactions");
 const {findAll} = require('../repository/repoAgent')
 
 const name = "startProd";
+const updatePrev = false;
+const deferred = true;
 const action = async ()=>{
-
     try {
 
         const allagent = await findAll();
@@ -55,4 +56,4 @@ const action = async ()=>{
     }
 }
 
-module.exports = {name,action}
+module.exports = {name,action,updatePrev,deferred}
