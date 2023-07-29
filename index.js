@@ -79,7 +79,7 @@ app.post('/interactions', async function (req, res) {
             const resp = await  cmdClass.action()
             // console.log(resp)
             if (cmdClass.deferred || !cmdClass.updatePrev) await editMessage(resp,_editUrl)
-            else await editMessage(resp,_createdUrl)
+            else await createInterResp(resp,_createdUrl)
             // res.send(resp)
         }catch (e) {
             logger("command :"+name+", does not exist")
