@@ -15,7 +15,7 @@ const { VerifyDiscordRequest, getRandomEmoji, DiscordRequest,logger,createInterR
 // Commands loading
 var normalizedPath = require("path").join(__dirname, "commands");
 let commandClass = {}
-console.log(normalizedPath)
+console.log("normalizedPath:",normalizedPath)
 fs.readdirSync(normalizedPath).forEach(function(file) {
 
     const body = require("./commands/" + file)
@@ -32,8 +32,6 @@ const app = express();
 const PORT = process.env.PORT || 80;
 // Parse request body and verifies incoming requests using discord-interactions package
 app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
-
-const repoAgent = require('./repository/repoAgent.js')
 
 /**
  * Interactions endpoint URL where Discord will send HTTP requests
