@@ -74,4 +74,4 @@ const action = ()=>{
     }
 }
 
-module.exports = {name,action}
+module.exports = {name,action,updatePrev,deferred}
