@@ -18,6 +18,7 @@ let commandClass = {}
 console.log("normalizedPath:",normalizedPath)
 fs.readdirSync(normalizedPath).forEach(function(file) {
 
+    console.log("./commands/" + file)
     const body = require("./commands/" + file)
     commandClass[body.name] = body;
     console.log("./commands/" + file)
