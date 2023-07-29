@@ -78,6 +78,7 @@ async function editMessage(msg,application_id,token){
     // const url = process.env._editUrl;
     const url = `https://discord.com/api/webhooks/${application_id}/${token}/messages/@original`;
     msg = msg.data
+    console.log("=============axio data",msg)
     logger("edit:"+url);
     await axios.patch(url,msg)
         .then(data => console.log("axios response: success"))
