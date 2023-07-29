@@ -88,7 +88,7 @@ app.post('/interactions', async function (req, res) {
             if (cmdClass.deferred && !cmdClass.updatePrev) await deferedMsg(_createdUrl,token)
 
             // await deferedMsg(_createdUrl)
-            const resp = await  cmdClass.action({"interComp":interComp,"token":token})
+            const resp = await  cmdClass.action({"interComp":interComp,"prevInteractionId":id})
 
             // check if response need be to updated on interaction
             if (cmdClass.updatePrev) await editMessage(resp,application_id,prevInteractiontoken)

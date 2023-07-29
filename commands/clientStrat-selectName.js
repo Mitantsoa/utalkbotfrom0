@@ -4,7 +4,7 @@ const {findAll} = require('../repository/repoAgent')
 const name = "startProd";
 const updatePrev = false;
 const deferred = true;
-const action = async ({token})=>{
+const action = async ({prevInteractionId})=>{
     try {
         console.log('=========token',token)
         const allagent = await findAll();
@@ -37,7 +37,7 @@ const action = async ({token})=>{
                         "components": [
                             {
                                 "type": 3,
-                                "custom_id": "clientstart-agentUID|"+token,
+                                "custom_id": "clientstart-agentUID|"+prevInteractionId,
                                 "options":options,
                                 "placeholder": "---",
                                 "min_values": 1,
