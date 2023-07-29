@@ -19,7 +19,7 @@ console.log("normalizedPath:",normalizedPath)
 fs.readdirSync(normalizedPath).forEach(function(file) {
 
     console.log("./commands/" + file)
-    const body = require(normalizedPath + file)
+    const body = require(normalizedPath +'/'+ file)
     console.log("body" + body)
     commandClass[body.name] = body;
     console.log("./commands/" + file)
