@@ -83,7 +83,7 @@ app.post('/interactions', async function (req, res) {
             const resp = await  cmdClass.action({"interComp":interComp,"token":token})
             console.log("==========resp ",resp)
             if (cmdClass.updatePrev) await editMessage(resp.data,application_id,prevInteractiontoken)
-            if (cmdClass.deferred) await editMessage(resp.data,application_id,token)
+            else if (cmdClass.deferred) await editMessage(resp.data,application_id,token)
             else await createInterResp(resp,_createdUrl)
             // res.send(resp)
         }catch (e) {
