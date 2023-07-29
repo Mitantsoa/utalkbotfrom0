@@ -70,6 +70,7 @@ app.post('/interactions', async function (req, res) {
         const interIndex = data.name == undefined ? data.custom_id.split("|")[0] : data.name.split("|")[0]
         const prevInteractionId = data.name == undefined ? data.custom_id.split("|")[1] : data.name.split("|")[1]
         const interComp = data.components
+        console.log("interComp:",interComp)
         let prevInteractiontoken = ""
         // const { name } = data;
         const cmdClass = commandClass[interIndex]
