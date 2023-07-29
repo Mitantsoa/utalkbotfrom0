@@ -3,6 +3,7 @@ const {fetch,insert} = require('../service/mysql.js');
 async function findtoken(id,appid){
     // const sql = 'SELECT * FROM `agent` where `agentdiscusername` = '+username+')';
     const sql = `SELECT interactiontoken FROM token WHERE interactionid = ${id} and applicationid = ${appid}`;
+    console.log("find token sql:\n"+sql)
     const data = await fetch(sql);
     return data[0];
 }
