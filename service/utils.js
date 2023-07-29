@@ -7,6 +7,7 @@ const fs = require("fs");
 const axios = require("axios");
 
 function VerifyDiscordRequest(clientKey) {
+    console.log("-------------")
     return function (req, res, buf, encoding) {
         const signature = req.get('X-Signature-Ed25519');
         const timestamp = req.get('X-Signature-Timestamp');
