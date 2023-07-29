@@ -11,6 +11,7 @@ async function findtoken(id,appid){
 async function addtoken(value){
 
     const sql = 'INSERT INTO `token`(`interactionid`,`applicationid`,`interactiontoken`) VALUES (?,?,?)';
+    console.log("add token sql:\n"+sql)
     return await insert(sql,value);
 }
 module.exports = {findtoken,addtoken}
