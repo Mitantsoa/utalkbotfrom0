@@ -77,7 +77,7 @@ async function editMessage(msg,url){
     // updating loading message
     // const url = process.env._editUrl;
     msg = msg.data
-    logger(url);
+    logger("edit:"+url);
     await axios.patch(url,msg)
         .then(data => console.log("axios response: success"))
         .catch(e => console.log("axios error: error",e.response.data))
@@ -85,7 +85,7 @@ async function editMessage(msg,url){
 
 async function createInterResp(msg,url){
     // create interaction response
-    logger(url);
+    logger("create"+url);
     await axios.post(url,msg)
         .then(data => console.log("response sent"))
         .catch(e => console.log("there is error",e))
