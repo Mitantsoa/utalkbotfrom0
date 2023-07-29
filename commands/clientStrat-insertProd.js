@@ -3,6 +3,8 @@ const {InteractionResponseType} = require("discord-interactions");
 const {findAll} = require('../repository/repoAgent')
 
 const name = "clientstart-agentUID";
+const updatePrev = true;
+const deferred = true;
 const action = async ()=>{
 
     try {
@@ -41,4 +43,4 @@ const action = async ()=>{
     }
 }
 
-module.exports = {name,action}
+module.exports = {name,action,updatePrev,deferred}

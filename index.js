@@ -10,7 +10,7 @@ const {
     MessageComponentTypes,
     ButtonStyleTypes,
 } =require('discord-interactions')
-const { VerifyDiscordRequest, getRandomEmoji, DiscordRequest,logger,createInterResp,deferedMsg,editMessage } = require('./service/utils.js');
+const { VerifyDiscordRequest, getRandomEmoji, DiscordRequest,logger,createInterResp,deferedMsg,editMessage,editdeferedMsg } = require('./service/utils.js');
 
 // Commands loading
 var normalizedPath = require("path").join(__dirname, "commands");
@@ -19,7 +19,7 @@ console.log(normalizedPath)
 fs.readdirSync(normalizedPath).forEach(function(file) {
 
     const body = require("./commands/" + file)
-    commandClass[body.name] = body.action;
+    commandClass[body.name] = body;
     console.log("./commands/" + file)
 
 });
@@ -68,11 +68,18 @@ app.post('/interactions', async function (req, res) {
      */
     if (type === InteractionType.APPLICATION_COMMAND) {
         const { name } = data;
+        const cmdClass = commandClass[name]
         logger("name = "+name)
         try{
-            await deferedMsg(_createdUrl)
-            const resp = await  commandClass[name]()
+            if(cmdClass.deferred && cmdClass.updatePrev){
+                await editdeferedMsg(_editUrl)
+            }
+            if (cmdClass.deferred && !cmdClass.updatePrev) await deferedMsg(_createdUrl)
+
+            // await deferedMsg(_createdUrl)
+            const resp = await  cmdClass.action()
             // console.log(resp)
+            // if (!cmdClass.deferred && cmdClass.updatePrev)
             await editMessage(resp,_editUrl)
             // res.send(resp)
         }catch (e) {
@@ -81,8 +88,9 @@ app.post('/interactions', async function (req, res) {
     }else{
         const { custom_id, components } = data;
         console.log("data :",data)
+        const cmdClass = commandClass[custom_id]
         try{
-            const resp = await commandClass[custom_id](components)
+            const resp = await cmdClass.action(components)
             console.log(resp)
             await createInterResp(resp,_createdUrl)
         }catch (e) {

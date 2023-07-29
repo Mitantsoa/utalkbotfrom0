@@ -101,4 +101,15 @@ async function deferedMsg(url){
     await createInterResp(msg,url)
 }
 
-module.exports = {VerifyDiscordRequest,DiscordRequest,InstallGlobalCommands,getRandomEmoji,capitalize,logger,editMessage,deferedMsg,createInterResp}
+async function editdeferedMsg(url){
+    const msg = {
+        type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
+        "data": {
+            "tts": false,
+            "content": "WIP",
+            "allowed_mentions": { "parse": [] },
+        }};
+    await editMessage(msg,url)
+}
+
+module.exports = {VerifyDiscordRequest,DiscordRequest,InstallGlobalCommands,getRandomEmoji,capitalize,logger,editMessage,deferedMsg,createInterResp,editdeferedMsg}
