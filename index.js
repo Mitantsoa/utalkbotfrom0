@@ -11,7 +11,7 @@ const {
     ButtonStyleTypes,
 } =require('discord-interactions')
 const { VerifyDiscordRequest, getRandomEmoji, DiscordRequest,logger,createInterResp,deferedMsg,editMessage,editdeferedMsg } = require('./service/utils.js');
-
+const {findtoken,addtoken} = require('./repository/repotoken.js')
 // Commands loading
 var normalizedPath = require("path").join(__dirname, "commands");
 let commandClass = {}
@@ -67,8 +67,9 @@ app.post('/interactions', async function (req, res) {
      */
     // if (type === InteractionType.APPLICATION_COMMAND) {
         const interIndex = data.name == undefined ? data.custom_id.split("|")[0] : data.name.split("|")[0]
-        const prevInteractiontoken = data.name == undefined ? data.custom_id.split("|")[1] : data.name.split("|")[1]
+        const prevInteractionId = data.name == undefined ? data.custom_id.split("|")[1] : data.name.split("|")[1]
         const interComp = data.components
+        let prevInteractiontoken = ""
         // const { name } = data;
         const cmdClass = commandClass[interIndex]
         logger("interIndex = "+interIndex)
@@ -76,12 +77,20 @@ app.post('/interactions', async function (req, res) {
         try{
             logger('cmdClass.deferred:'+cmdClass.deferred)
             logger('cmdClass.updatePrev:'+cmdClass.updatePrev)
+
+            // store current interaction and token
+            await addtoken([id,application_id,token])
+            // fetch previous token of previous interaction
+            if(cmdClass.updatePrev) prevInteractiontoken = await findtoken(id,application_id)
+
+            // check if deferred si required
             if(cmdClass.deferred && cmdClass.updatePrev) await editdeferedMsg(application_id,prevInteractiontoken)
             if (cmdClass.deferred && !cmdClass.updatePrev) await deferedMsg(_createdUrl,token)
 
             // await deferedMsg(_createdUrl)
             const resp = await  cmdClass.action({"interComp":interComp,"token":token})
 
+            // check if response need be to updated on interaction
             if (cmdClass.updatePrev) await editMessage(resp,application_id,prevInteractiontoken)
             else if (cmdClass.deferred) await editMessage(resp,application_id,token)
             else await createInterResp(resp,_createdUrl)
