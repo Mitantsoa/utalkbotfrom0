@@ -89,7 +89,7 @@ async function createInterResp(msg,url){
         .catch(e => console.log("there is error",e))
 }
 
-async function deferedMsg(){
+async function deferedMsg(url){
     const msg = {
         type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
         "data": {
@@ -97,7 +97,7 @@ async function deferedMsg(){
             "content": "WIP",
             "allowed_mentions": { "parse": [] },
         }};
-    await createInterResp(msg)
+    await createInterResp(msg,url)
 }
 
 module.exports = {VerifyDiscordRequest,DiscordRequest,InstallGlobalCommands,getRandomEmoji,capitalize,logger,editMessage,deferedMsg,createInterResp}

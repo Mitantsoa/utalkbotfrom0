@@ -10,7 +10,7 @@ const {
     MessageComponentTypes,
     ButtonStyleTypes,
 } =require('discord-interactions')
-const { VerifyDiscordRequest, getRandomEmoji, DiscordRequest,logger,createInterResp } = require('./service/utils.js');
+const { VerifyDiscordRequest, getRandomEmoji, DiscordRequest,logger,createInterResp,deferedMsg,editMessage } = require('./service/utils.js');
 
 // Commands loading
 var normalizedPath = require("path").join(__dirname, "commands");
@@ -70,9 +70,10 @@ app.post('/interactions', async function (req, res) {
         const { name } = data;
         logger("name = "+name)
         try{
+            await deferedMsg(_createdUrl)
             const resp = await  commandClass[name]()
             // console.log(resp)
-            await createInterResp(resp,_createdUrl)
+            // await editMessage(resp,_createdUrl)
             // res.send(resp)
         }catch (e) {
             logger("command :"+name+", does not exist")
