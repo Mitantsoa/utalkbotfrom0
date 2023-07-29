@@ -8,7 +8,8 @@ async function findtoken(id,appid){
 }
 
 async function addtoken(value){
-    const sql = 'INSERT INTO `token`(`interactionid`,`applicationid`,`interactiontoken`) VALUES (?,?)';
+
+    const sql = 'INSERT INTO `token`(`interactionid`,`applicationid`,`interactiontoken`) VALUES (?,?,?)';
     return await insert(sql,value);
 }
 module.exports = {findtoken,addtoken}
