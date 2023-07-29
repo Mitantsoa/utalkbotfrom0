@@ -74,14 +74,14 @@ app.post('/interactions', async function (req, res) {
         logger("interIndex = "+interIndex)
         logger("prevInteractiontoken = "+prevInteractiontoken)
         try{
-            console.log('cmdClass.deferred:',cmdClass.deferred)
-            console.log('cmdClass.updatePrev:',cmdClass.updatePrev)
+            logger('cmdClass.deferred:'+cmdClass.deferred)
+            logger('cmdClass.updatePrev:'+cmdClass.updatePrev)
             if(cmdClass.deferred && cmdClass.updatePrev) await editdeferedMsg(application_id,prevInteractiontoken)
             if (cmdClass.deferred && !cmdClass.updatePrev) await deferedMsg(_createdUrl,token)
 
             // await deferedMsg(_createdUrl)
             const resp = await  cmdClass.action({"interComp":interComp,"token":token})
-            // console.log(resp)
+            console.log("==========resp ",resp)
             if (cmdClass.updatePrev) await editMessage(resp,application_id,prevInteractiontoken)
             if (cmdClass.deferred) await editMessage(resp,application_id,token)
             else await createInterResp(resp,_createdUrl)

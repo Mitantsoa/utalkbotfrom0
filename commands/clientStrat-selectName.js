@@ -17,7 +17,7 @@ const action = async ({token})=>{
             };
         })
 
-        console.log(options)
+        // console.log(options)
 
         // Send a message into the channel where command was triggered from
         const data = {
