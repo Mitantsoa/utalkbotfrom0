@@ -26,6 +26,8 @@ const inputbuilder = listDBfield.map(v=>{
 console.log(inputbuilder)
 
 const name = "add_login";
+const updatePrev = false;
+const deferred = false;
 const action = async ()=>{
     logger("InteractionResponseType.MODAL= "+ InteractionResponseType.MODAL);
     try {
@@ -67,4 +69,4 @@ const action = async ()=>{
     }
 }
 
-module.exports = {name,action}
+module.exports = {name,action,updatePrev,deferred}

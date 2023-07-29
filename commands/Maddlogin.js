@@ -2,6 +2,8 @@ const {InteractionResponseType} = require("discord-interactions");
 const {adduser,findUser} = require("../repository/repoLogin.js");
 
 const name = "M_add_login";
+const updatePrev = false;
+const deferred = true;
 const action = async (comp)=>{
         // logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.MODAL);
     try {
@@ -52,4 +54,4 @@ const action = async (comp)=>{
     }
 }
 
-module.exports = {name,action}
+module.exports = {name,action,updatePrev,deferred}

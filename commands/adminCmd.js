@@ -3,6 +3,8 @@ const {InteractionResponseType} = require("discord-interactions");
 
 
 const name = "ping2";
+const updatePrev = false;
+const deferred = true;
 const action = ()=>{
     logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE);
     try {
@@ -54,4 +56,4 @@ const action = ()=>{
     }
 }
 
-module.exports = {name,action}
+module.exports = {name,action,updatePrev,deferred}
