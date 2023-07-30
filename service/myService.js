@@ -67,7 +67,7 @@ const isLoginOnProd = async (discoUser)=> {
     const openProd = await fetchopenproductionfromuserdisco(discoUser)
     console.log("openProd : ",openProd)
     console.log("openProd.size : ",openProd.length)
-    const isOnProd = openProd.length > 0 ? false : true;
+    const isOnProd = openProd.length > 0 ? true : false;
     console.log("isOnProd : ",isOnProd)
     return {status:isOnProd,data:openProd[0]}
 }
