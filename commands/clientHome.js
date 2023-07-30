@@ -16,7 +16,7 @@ const action = ()=>{
                 "content": "Home :",
                 "embeds": [
                     {
-                        "title": "Bouton de configuration",
+                        "title": "Agent Home",
                         "description": "C'est ici la gestion de la présence",
                         "color": 5814783,
                         "fields": [

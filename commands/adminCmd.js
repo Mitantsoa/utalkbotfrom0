@@ -17,7 +17,7 @@ const action = ()=>{
                 "content": "ADMIN :",
                 "embeds": [
                     {
-                        "title": "Bouton de configuration",
+                        "title": "Superviseur Home",
                         "description": "Uniquement authorise pour le superviseur",
                         "color": 5814783,
                         "fields": [
