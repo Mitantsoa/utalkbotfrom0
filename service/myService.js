@@ -13,17 +13,18 @@ const startProduction = async (discoUser,idagent)=>{
         console.log("isAvailable : ",isAvailable)
         // Collection all input
         const login = await findLoginByDiscouser(discoUser);
-        const _idlogin = login[0].idlogin;
-        const _loginpost = login[0].loginpost;
+        const _idlogin = login.idlogin;
+        const _loginpost = login.loginpost;
 
         const _idagent = idagent;
 
         if(!isAvailable) return `Login **${_loginpost}** toujours en service merci de terminer le shift encours`;
-        //
+
+        const insertProd = await addProd([_idagent,_idlogin]);
+        const _idproduction = insertProd[0].insertId;
+        console.log("_idproduction :",_idproduction)
         // const _productiondetailsdate = moment().format('yyyy-MM-DD HH:mm:ss');
         // const _idprod_action = 1;
-        // const insertProd = await addProd([_idagent,_idlogin]);
-        // const _idproduction = insertProd[0].insertId;
         // await addProdDetails([_productiondetailsdate,_idprod_action,_idproduction]);
         //
         // const cdrdetails = await fetchlastcdrbyloginpost(_loginpost)
