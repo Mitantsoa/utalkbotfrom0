@@ -9,7 +9,7 @@ const startProduction = async (discoUser,idagent)=>{
         const openProd = await fetchopenproductionfromuserdisco(discoUser)
         console.log("openProd : ",openProd)
         console.log("openProd.size : ",openProd.length)
-        const isAvailable = openProd.length > 0 ? true : false;
+        const isAvailable = openProd.length > 0 ? false : true;
         console.log("isAvailable : ",isAvailable)
         // Collection all input
         // const login = await findLoginByDiscouser(discoUser);

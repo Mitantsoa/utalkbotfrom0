@@ -11,9 +11,9 @@ const action = async ({data,member})=>{
     try {
 
         const discoUser = member.user.username
-        console.log("agent id :",data)
-        console.log("agent id :",data.values[0])
-        console.log("discoUser:",discoUser)
+        // console.log("agent id :",data)
+        // console.log("agent id :",data.values[0])
+        // console.log("discoUser:",discoUser)
         const startprod = await startProduction(discoUser,data.values[0])
         // const startprod = "this is a test";
 
