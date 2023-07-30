@@ -11,7 +11,7 @@ const action = async ({interactionid})=>{
         const options = allagent.map((v,i)=>{
             return {
                 "label": v.Agentuid,
-                "value": v.Agentuid,
+                "value": v.idAgent,
                 "description": v.Agentfirstname +"-"+v.Agentlastname,
                 "disabled":true
             };
