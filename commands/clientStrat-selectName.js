@@ -10,9 +10,9 @@ const action = async ({interactionid})=>{
         const allagent = await findAll();
         const options = allagent.map((v,i)=>{
             return {
-                "label": v.Agentuid,
+                "label": v.Agentfirstname +"-"+v.Agentlastname,
                 "value": v.idAgent,
-                "description": v.Agentfirstname +"-"+v.Agentlastname,
+                "description": v.Agentuid ,
                 "disabled":true
             };
         })
