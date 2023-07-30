@@ -38,14 +38,38 @@ const startProduction = async (discoUser,idagent)=>{
     }
 }
 
+const addBreak = async (discoUser,_idproduction,_idagent)=>{
+
+    try{
+        // Collection all input
+        const login = await findLoginByDiscouser(discoUser);
+        const _idlogin = login.idlogin;
+        const _loginpost = login.loginpost;
+        const agent = await findUser(_idagent);
+        const _agentfirstname = agent.Agentfirstname;
+        console.log("_idlogin :",_idlogin)
+        console.log("_loginpost :",_loginpost)
+        console.log("_idproduction :",_idproduction)
+        console.log("_agentfirstname :",_agentfirstname)
+        const _productiondetailsdate = moment().format('yyyy-MM-DD HH:mm:ss');
+        const _idprod_action = 2;
+        await addProdDetails([_productiondetailsdate,_idprod_action,_idproduction]);
+        return notifMessage.info(`Début pause [${_agentfirstname}]:\n- date : ${_productiondetailsdate}\n- login : ${_loginpost}`)
+    }catch (e){
+        console.log(e)
+        return notifMessage.error('Erreur survenu');
+    }
+
+}
+
 const isLoginOnProd = async (discoUser)=> {
     // check if login available
     const openProd = await fetchopenproductionfromuserdisco(discoUser)
     console.log("openProd : ",openProd)
     console.log("openProd.size : ",openProd.length)
-    const isAvailable = openProd.length > 0 ? false : true;
-    console.log("isAvailable : ",isAvailable)
-    return isAvailable
+    const isOnProd = openProd.length > 0 ? false : true;
+    console.log("isOnProd : ",isOnProd)
+    return {status:isOnProd,data:openProd[0]}
 }
 
 const notifMessage = {
@@ -77,4 +101,4 @@ const notifMessagebase = ({type,desc,color})=>{
     };
 }
 
-module.exports = {startProduction,isLoginOnProd,notifMessage}
+module.exports = {startProduction,isLoginOnProd,notifMessage,addBreak}

@@ -52,7 +52,7 @@ const action = ()=>{
                             "type": 2,
                             "label": "Pause",
                             "style": 2,
-                            "custom_id": "stundbyProd"
+                            "custom_id": "clientpause-start"
                         },{
                             "type": 2,
                             "label": "Retour",

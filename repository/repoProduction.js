@@ -37,7 +37,9 @@ async function addProdResult(value){
  */
 async function fetchopenproductionfromuserdisco(value){
     const sql = `select 
-        p.idproduction
+        p.idproduction,
+        p.idagent,
+        p.idlogin
         from login as l 
         inner join production as p on (l.idlogin=p.idlogin) 
         inner join (
