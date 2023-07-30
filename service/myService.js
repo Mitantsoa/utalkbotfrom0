@@ -38,8 +38,7 @@ const startProduction = async (discoUser,idagent)=>{
     }
 }
 
-const addBreak = async (discoUser,_idproduction,_idagent)=>{
-
+const addBreakMidlware = async (discoUser,_idproduction,_idagent,_idprod_action,msgTitle)=>{
     try{
         // Collection all input
         const login = await findLoginByDiscouser(discoUser);
@@ -52,14 +51,20 @@ const addBreak = async (discoUser,_idproduction,_idagent)=>{
         console.log("_idproduction :",_idproduction)
         console.log("_agentfirstname :",_agentfirstname)
         const _productiondetailsdate = moment().format('yyyy-MM-DD HH:mm:ss');
-        const _idprod_action = 2;
         await addProdDetails([_productiondetailsdate,_idprod_action,_idproduction]);
-        return notifMessage.info(`Début pause [${_agentfirstname}]:\n- date : ${_productiondetailsdate}\n- login : ${_loginpost}`)
+        return notifMessage.info(`${msgTitle} [${_agentfirstname}]:\n- date : ${_productiondetailsdate}\n- login : ${_loginpost}`)
     }catch (e){
         console.log(e)
         return notifMessage.error('Erreur survenu');
     }
-
+}
+const addBreak = {
+    _start:async (discoUser,_idproduction,_idagent)=>{
+        return addBreakMidlware(discoUser,_idproduction,_idagent,2,'Début du pause');
+    },
+    _end:async (discoUser,_idproduction,_idagent)=>{
+        return addBreakMidlware(discoUser,_idproduction,_idagent,3,'Fin de shift');
+    },
 }
 
 const isLoginOnProd = async (discoUser)=> {

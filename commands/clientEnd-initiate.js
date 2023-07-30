@@ -1,7 +1,3 @@
-const {InteractionResponseType} = require("discord-interactions");
-const {startProduction} = require('../service/myService.js')
-const {errorMsg} = require('../service/utils.js')
-const moment = require("moment");
 const {findLoginByDiscouser} = require("../repository/repoLogin");
 const {isLoginOnProd, notifMessage, addBreak} = require("../service/myService");
 
@@ -18,7 +14,7 @@ const action = async ({data,member})=>{
         console.log("_isLoginOnProd :",_isLoginOnProd)
         if(!_isLoginOnProd.status) return notifMessage.info(`Login **${_loginpost.loginpost}** n'est actuellement pas en production merci de commencer un shift avant une pause.`);
 
-        const _addBreak = await addBreak._start(discoUser,_isLoginOnProd.data.idproduction,_isLoginOnProd.data.idagent)
+        const _addBreak = await addBreak(discoUser,_isLoginOnProd.data.idproduction,_isLoginOnProd.data.idagent)
 
         return _addBreak;
 
