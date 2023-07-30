@@ -10,7 +10,7 @@ const action = async ({interactionid,member})=>{
     try {
         console.log('=========interactionid',interactionid)
         const discoUser = member.user.username
-        const _loginpost = await findLoginByDiscouser()
+        const _loginpost = await findLoginByDiscouser(discoUser)
         const _isLoginOnProd = await isLoginOnProd(discoUser)
         console.log("_isLoginOnProd :",_isLoginOnProd)
         if(!_isLoginOnProd) return notifMessage.info(`Login **${_loginpost.loginpost}** toujours en service merci de terminer le shift encours`);
