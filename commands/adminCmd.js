@@ -1,5 +1,6 @@
 const {logger} = require("../service/utils");
 const {InteractionResponseType} = require("discord-interactions");
+const {notifMessage} = require("../service/myService");
 
 
 const name = "ping2";
@@ -53,6 +54,7 @@ const action = ()=>{
 
     }catch (e) {
         console.log(e)
+        return notifMessage.error();
     }
 }
 

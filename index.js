@@ -12,6 +12,7 @@ const {
 } =require('discord-interactions')
 const { VerifyDiscordRequest, getRandomEmoji, DiscordRequest,logger,createInterResp,deferedMsg,editMessage,editdeferedMsg } = require('./service/utils.js');
 const {findtoken,addtoken} = require('./repository/repotoken.js')
+const {notifMessage} = require("./service/myService");
 // Commands loading
 var normalizedPath = require("path").join(__dirname, "commands");
 let commandClass = {}
@@ -38,35 +39,37 @@ app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
  * Interactions endpoint URL where Discord will send HTTP requests
  */
 app.post('/interactions', async function (req, res) {
-    // Interaction type and data
-    const { type, application_id, data, member,token,id} = req.body;
-    console.group("req Body")
-    // console.log(req.body)
-    console.groupEnd()
-    logger("request type = "+ type)
-    logger("InteractionType.PING = " + InteractionType.PING)
-    // console.log('member',member)
-    const username = member.user.username
-    logger("user =" + username)
-    logger("AppId =" + application_id)
-    logger("Type =" + type)
-    logger("id =" + id)
+
+    try{
+        // Interaction type and data
+        const { type, application_id, data, member,token,id} = req.body;
+        console.group("req Body")
+        // console.log(req.body)
+        console.groupEnd()
+        logger("request type = "+ type)
+        logger("InteractionType.PING = " + InteractionType.PING)
+        // console.log('member',member)
+        const username = member.user.username
+        logger("user =" + username)
+        logger("AppId =" + application_id)
+        logger("Type =" + type)
+        logger("id =" + id)
 
 
-    const _createdUrl  = `https://discord.com/api/interactions/${id}/${token}/callback`;
+        const _createdUrl  = `https://discord.com/api/interactions/${id}/${token}/callback`;
 
-    /**
-     * Handle verification requests
-     */
-    if (type === InteractionType.PING) {
-        return res.send({ type: InteractionResponseType.PONG });
-    }
+        /**
+         * Handle verification requests
+         */
+        if (type === InteractionType.PING) {
+            return res.send({ type: InteractionResponseType.PONG });
+        }
 
-    /**
-     * Handle slash command requests
-     * See https://discord.com/developers/docs/interactions/application-commands#slash-commands
-     */
-    // if (type === InteractionType.APPLICATION_COMMAND) {
+        /**
+         * Handle slash command requests
+         * See https://discord.com/developers/docs/interactions/application-commands#slash-commands
+         */
+            // if (type === InteractionType.APPLICATION_COMMAND) {
         const interIndex = data.name == undefined ? data.custom_id.split("|")[0] : data.name.split("|")[0]
         const prevInteractionId = data.name == undefined ? data.custom_id.split("|")[1] : data.name.split("|")[1]
         const interComp = data.components
@@ -105,7 +108,12 @@ app.post('/interactions', async function (req, res) {
             // res.send(resp)
         }catch (e) {
             logger("command :"+interIndex+" does not exist")
+            res.send(notifMessage.error());
         }
+    }catch (e) {
+        res.send(notifMessage.error())
+    }
+
     // }else{
     //     const { custom_id, components } = data;
     //     console.log("data :",data)

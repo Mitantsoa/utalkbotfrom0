@@ -1,5 +1,6 @@
 const {InteractionResponseType} = require("discord-interactions");
 const {adduser,findUser} = require("../repository/repoLogin.js");
+const {notifMessage} = require("../service/myService");
 
 const name = "M_add_login";
 const updatePrev = false;
@@ -51,6 +52,7 @@ const action = async (comp)=>{
 
     }catch (e) {
         console.log(e)
+        return notifMessage.error();
     }
 }
 

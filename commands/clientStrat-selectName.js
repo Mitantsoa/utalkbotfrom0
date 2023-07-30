@@ -61,6 +61,7 @@ const action = async ({interactionid,member})=>{
 
     }catch (e) {
         console.log(e)
+        return notifMessage.error();
     }
 }
 

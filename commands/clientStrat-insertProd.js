@@ -2,6 +2,7 @@ const {InteractionResponseType} = require("discord-interactions");
 const {startProduction} = require('../service/myService.js')
 const {errorMsg} = require('../service/utils.js')
 const moment = require("moment");
+const {notifMessage} = require("../service/myService");
 
 const name = "clientstart-agentUID";
 const updatePrev = true;
@@ -15,29 +16,12 @@ const action = async ({data,member})=>{
         // console.log("agent id :",data.values[0])
         // console.log("discoUser:",discoUser)
         const startprod = await startProduction(discoUser,data.values[0])
-        // const startprod = "this is a test";
 
-        // Send a message into the channel where command was triggered from
-        const dataresp = {
-            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-            data:{
-                "content": "",
-                "embeds": [
-                    {
-                        "title": "Début shift",
-                        "description": startprod,
-                        "color": 5814783
-                    }
-                ],
-                "components": []
-            }
-        };
-        // await createInterResp(data)
-        return dataresp;
+        return startprod;
 
     }catch (e) {
         console.log(e)
-        return errorMsg;
+        return notifMessage.error('Erreur survenu');
     }
 }
 

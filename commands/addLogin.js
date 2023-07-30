@@ -1,5 +1,6 @@
 const {logger,createInterResp} = require("../service/utils");
 const {InteractionResponseType} = require("discord-interactions");
+const {notifMessage} = require("../service/myService");
 
 
 const listDBfield =[
@@ -34,27 +35,6 @@ const action = async ()=>{
         // Send a message into the channel where command was triggered from
         const data = {
             type: InteractionResponseType.MODAL,
-            // "data": {
-            //     "title":"Ajouter un agent",
-            //     "custom_id":name,
-            //     "components": [
-            //         {
-            //             "type": 1,
-            //             "components": [
-            //                 {
-            //                     "type": 4,
-            //                     "custom_id": "v.id",
-            //                     "label": "v.label",
-            //                     "style": 1,
-            //                     "min_length": 1,
-            //                     "max_length": 4000,
-            //                     "placeholder": "...",
-            //                     "required": "v.required"
-            //                 }
-            //             ]
-            //         }
-            //     ]
-            // }
             data:{
                 "title": "Ajouter Login",
                 "custom_id": "M_add_login",
@@ -66,6 +46,7 @@ const action = async ()=>{
 
     }catch (e) {
         console.log(e)
+        return notifMessage.error();
     }
 }
 

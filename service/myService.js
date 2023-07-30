@@ -34,12 +34,12 @@ const startProduction = async (discoUser,idagent)=>{
 
         const _agent = await findUser(_idagent)
 
-        return `Début shift agent **${_agent.Agentfirstname}** :\n-Début : ${_productiondetailsdate}\n-login : ${_loginpost}`;
+        return notifMessage.info(`Début shift agent **${_agent.Agentfirstname}** :\n-Début : ${_productiondetailsdate}\n-login : ${_loginpost}`);
         // return `Début shift`;
 
     }catch (e) {
         console.log(e);
-        return 'Erreur survenu';
+        return notifMessage.error('Erreur survenu');
     }
 }
 
@@ -130,7 +130,7 @@ const notifMessage = {
         return notifMessagebase({type:"INFO",desc:message,color:5814783});
     },
     "error" : (message)=>{
-        return notifMessagebase({type:"ERROR",desc:message,color:13575703});
+        return notifMessagebase({type:"ERROR",desc:"Erreur survenu",color:13575703});
     },
     "warrning" : (message)=>{
         return notifMessagebase({type:"INFO",desc:message,color:14582290});

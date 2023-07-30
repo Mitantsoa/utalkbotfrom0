@@ -1,6 +1,7 @@
 const {logger,deferedMsg,editMessage,createInterResp} = require("../service/utils");
 const {InteractionResponseType} = require("discord-interactions");
 const {adduser,findUser} = require("../repository/repoAgent.js");
+const {notifMessage} = require("../service/myService");
 
 const name = "cool_modal";
 const updatePrev = false;
@@ -52,6 +53,7 @@ const action = async (comp)=>{
 
     }catch (e) {
         console.log(e)
+        return notifMessage.error();
     }
 }
 
