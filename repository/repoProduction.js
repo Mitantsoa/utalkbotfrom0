@@ -18,12 +18,12 @@ async function findLoginByLogin(id){
     === Add new producation
  */
 async function addProd(value){
-    const sql = 'INSERT INTO `producation`(`idagent`,`idlogin`) VALUES (?,?)';
+    const sql = 'INSERT INTO `production`(`idagent`,`idlogin`) VALUES (?,?)';
     return await insert(sql,value);
 }
 
 async function addProdDetails(value){
-    const sql = 'INSERT INTO `producationdetails`(`productiondetailsdate`,`idprod_action`,`idproduction`) VALUES (?,?,?)';
+    const sql = 'INSERT INTO `productiondetails`(`productiondetailsdate`,`idprod_action`,`idproduction`) VALUES (?,?,?)';
     return await insert(sql,value);
 }
 

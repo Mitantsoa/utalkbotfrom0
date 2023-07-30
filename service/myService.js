@@ -15,7 +15,8 @@ const startProduction = async (discoUser,idagent)=>{
         const login = await findLoginByDiscouser(discoUser);
         const _idlogin = login.idlogin;
         const _loginpost = login.loginpost;
-
+        console.log("_idlogin :",_idlogin)
+        console.log("_loginpost :",_loginpost)
         const _idagent = idagent;
 
         if(!isAvailable) return `Login **${_loginpost}** toujours en service merci de terminer le shift encours`;
