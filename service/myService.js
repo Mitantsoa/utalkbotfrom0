@@ -1,4 +1,5 @@
 const {findLoginByDiscouser} = require("../repository/repoLogin");
+const {findUser} = require("../repository/repoAgent");
 const {addProd,addProdDetails,addProdResult,fetchlastcdrbyloginpost, fetchopenproductionfromuserdisco} = require("../repository/repoProduction");
 const moment = require("moment");
 const {InteractionResponseType} = require("discord-interactions");
@@ -26,7 +27,9 @@ const startProduction = async (discoUser,idagent)=>{
         const _Resultopencdrid = cdrdetails[0].iddatingcdrdetails
         await addProdResult([_Resultopencdrid,null,_idproduction])
 
-        return `Début shift agent **${_idagent}** :\n-Début : ${_productiondetailsdate}\n-login : ${_loginpost}`;
+        const _agent = await findUser(_idagent)
+
+        return `Début shift agent **${_agent.Agentfirstname}** :\n-Début : ${_productiondetailsdate}\n-login : ${_loginpost}`;
         // return `Début shift`;
 
     }catch (e) {
