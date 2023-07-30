@@ -7,8 +7,9 @@ const startProduction = async (discoUser,idagent)=>{
     try{
         // check if login available
         const openProd = await fetchopenproductionfromuserdisco(discoUser)
-        console.log("openProd.size : ",openProd.size())
-        const isAvailable = openProd.size() > 0 ? true : false;
+        console.log("openProd : ",openProd)
+        console.log("openProd.size : ",openProd.length)
+        const isAvailable = openProd.length > 0 ? true : false;
         console.log("isAvailable : ",isAvailable)
         // Collection all input
         // const login = await findLoginByDiscouser(discoUser);
