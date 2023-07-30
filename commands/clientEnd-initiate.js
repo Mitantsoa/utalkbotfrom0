@@ -1,7 +1,7 @@
 const {findLoginByDiscouser} = require("../repository/repoLogin");
 const {isLoginOnProd, notifMessage, addBreak} = require("../service/myService");
 
-const name = "clientpause-start";
+const name = "";
 const updatePrev = false;
 const deferred = true;
 const action = async ({data,member})=>{
