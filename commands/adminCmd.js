@@ -3,7 +3,7 @@ const {InteractionResponseType} = require("discord-interactions");
 const {notifMessage} = require("../service/myService");
 
 
-const name = "ping2";
+const name = "useradd";
 const updatePrev = false;
 const deferred = true;
 const action = ()=>{
