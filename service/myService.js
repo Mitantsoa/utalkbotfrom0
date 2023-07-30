@@ -101,7 +101,7 @@ const addBreak = {
         return addBreakMidlware(discoUser,_idproduction,_idagent,2,'Début du pause');
     },
     _end:async (discoUser,_idproduction,_idagent)=>{
-        return addBreakMidlware(discoUser,_idproduction,_idagent,3,'Fin de shift');
+        return addBreakMidlware(discoUser,_idproduction,_idagent,3,'Fin de pause');
     },
 }
 
@@ -144,4 +144,4 @@ const notifMessagebase = ({type,desc,color})=>{
     };
 }
 
-module.exports = {startProduction,isLoginOnProd,notifMessage,addBreak}
+module.exports = {startProduction,isLoginOnProd,notifMessage,addBreak,endShift}
