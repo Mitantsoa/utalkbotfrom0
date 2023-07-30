@@ -59,6 +59,27 @@ async function fetchopenproductionfromuserdisco(value){
 }
 
 /*
+    === check pause on production login/discousername
+ */
+async function fetchopenpauseproductionfromuserdisco(value){
+    const sql = `select 
+        p.idproduction,
+        p.idagent,
+        p.idlogin
+        from login as l 
+        inner join production as p on (l.idlogin=p.idlogin) 
+        inner join (
+        select idproduction from productiondetails where idprod_action = 1
+        ) as _s on (p.idproduction=_s.idproduction) 
+        inner join (
+        select idproduction from productiondetails where idprod_action <> 2 group by idproduction
+        ) as _e on (p.idproduction=_e.idproduction) 
+        where 
+        l.logindiscousername = '${value}'`;
+    return await fetch(sql,[value]);
+}
+
+/*
     === fetch cdr
  */
 async function fetchlastcdrbyloginpost(loginpost){
@@ -83,4 +104,4 @@ async function fetchresultatend(value){
 }
 
 
-module.exports = {addProd,addProdDetails,fetchopenproductionfromuserdisco,addProdResult,fetchlastcdrbyloginpost,updateProdResult,fetchresultatend}
+module.exports = {addProd,addProdDetails,fetchopenproductionfromuserdisco,addProdResult,fetchlastcdrbyloginpost,updateProdResult,fetchresultatend,fetchopenpauseproductionfromuserdisco}

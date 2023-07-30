@@ -1,7 +1,7 @@
 const {findLoginByDiscouser} = require("../repository/repoLogin");
 const {findUser} = require("../repository/repoAgent");
 const {addProd,addProdDetails,addProdResult,fetchlastcdrbyloginpost, fetchopenproductionfromuserdisco, updateProdResult,
-    fetchresultatend
+    fetchresultatend, fetchopenpauseproductionfromuserdisco
 } = require("../repository/repoProduction");
 const moment = require("moment");
 const {InteractionResponseType} = require("discord-interactions");
@@ -115,6 +115,16 @@ const isLoginOnProd = async (discoUser)=> {
     return {status:isOnProd,data:openProd[0]}
 }
 
+const isLoginOnPause = async (discoUser)=> {
+    // check if login available
+    const openProd = await fetchopenpauseproductionfromuserdisco(discoUser)
+    console.log("openProd : ",openProd)
+    console.log("openProd.size : ",openProd.length)
+    const isOnProd = openProd.length > 0 ? true : false;
+    console.log("isOnProd : ",isOnProd)
+    return {status:isOnProd,data:openProd[0]}
+}
+
 const notifMessage = {
     "info" : (message)=>{
         return notifMessagebase({type:"INFO",desc:message,color:5814783});
@@ -144,4 +154,4 @@ const notifMessagebase = ({type,desc,color})=>{
     };
 }
 
-module.exports = {startProduction,isLoginOnProd,notifMessage,addBreak,endShift}
+module.exports = {startProduction,isLoginOnProd,notifMessage,addBreak,endShift,isLoginOnPause}
