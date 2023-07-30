@@ -15,7 +15,7 @@ async function fetch(sql){
     try{
         let data = await con.promise().query(sql);
         console.group("====== mysql :",sql)
-        console.log("====== mysql data",data)
+        console.log("====== mysql data :",data)
         console.groupEnd()
         return data[0]
     }catch (e) {
