@@ -115,4 +115,18 @@ async function editdeferedMsg(application_id,token){
     await editMessage(msg,application_id,token)
 }
 
-module.exports = {VerifyDiscordRequest,DiscordRequest,InstallGlobalCommands,getRandomEmoji,capitalize,logger,editMessage,deferedMsg,createInterResp,editdeferedMsg}
+const errorMsg = {
+    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+    data:{
+        "content": "",
+        "embeds": [
+            {
+                "title": "Erreur",
+                "description": "Une erreur lors du traitement",
+                "color": 5814783
+            }
+        ],
+        "components": []
+    }
+};
+module.exports = {VerifyDiscordRequest,DiscordRequest,InstallGlobalCommands,getRandomEmoji,capitalize,logger,editMessage,deferedMsg,createInterResp,editdeferedMsg,errorMsg}

@@ -1,24 +1,20 @@
-const {logger,createInterResp} = require("../service/utils");
 const {InteractionResponseType} = require("discord-interactions");
-const {findAll} = require('../repository/repoAgent')
+const {startProduction} = require('../service/myService.js')
+const {errorMsg} = require('../service/utils.js')
+const moment = require("moment");
 
 const name = "clientstart-agentUID";
 const updatePrev = true;
 const deferred = true;
-const action = async ()=>{
+const action = async ({data,member})=>{
 
     try {
 
-        const allagent = await findAll();
-        const options = allagent.map((v,i)=>{
-            return {
-                "label": v.Agentuid,
-                "value": v.Agentuid,
-                "description": v.Agentfirstname +"-"+v.Agentlastname
-            };
-        })
-
-        console.log(options)
+        const discoUser = member.user.username
+        console.log("agent id :",data.values[0])
+        console.log("discoUser:",discoUser)
+        // const startprod = await startProduction(discoUser,data.values[0])
+        const startprod = "this is a test";
 
         // Send a message into the channel where command was triggered from
         const data = {
@@ -27,8 +23,8 @@ const action = async ()=>{
                 "content": "",
                 "embeds": [
                     {
-                        "title": "Agent selected",
-                        "description": "",
+                        "title": "Début shift",
+                        "description": startprod,
                         "color": 5814783
                     }
                 ],
@@ -40,6 +36,7 @@ const action = async ()=>{
 
     }catch (e) {
         console.log(e)
+        return errorMsg;
     }
 }
 
