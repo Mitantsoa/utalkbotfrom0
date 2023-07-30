@@ -1,7 +1,7 @@
 const {findLoginByDiscouser} = require("../repository/repoLogin");
 const {isLoginOnProd, notifMessage, addBreak, endShift} = require("../service/myService");
 
-const name = "";
+const name = "stopProd";
 const updatePrev = false;
 const deferred = true;
 const action = async ({data,member})=>{
