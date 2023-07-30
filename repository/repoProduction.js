@@ -51,7 +51,7 @@ async function fetchopenproductionfromuserdisco(value){
         select idproduction from productiondetails where idprod_action = 1
         ) as _s on (p.idproduction=_s.idproduction) 
         inner join (
-        select idproduction from productiondetails where idprod_action <> 4 group by idproduction
+        select idproduction from productiondetails where idprod_action <> 4 and idproduction not in (select idproduction from productiondetails where idprod_action = 4 group by idproduction) group by idproduction
         ) as _e on (p.idproduction=_e.idproduction) 
         where 
         l.logindiscousername = '${value}'`;
