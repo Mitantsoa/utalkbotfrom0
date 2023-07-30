@@ -1,9 +1,14 @@
 const {findLoginByDiscouser} = require("../repository/repoLogin");
 const {findUser} = require("../repository/repoAgent");
-const {addProd,addProdDetails,addProdResult,fetchlastcdrbyloginpost, fetchopenproductionfromuserdisco} = require("../repository/repoProduction");
+const {addProd,addProdDetails,addProdResult,fetchlastcdrbyloginpost, fetchopenproductionfromuserdisco, updateProdResult,
+    fetchresultatend
+} = require("../repository/repoProduction");
 const moment = require("moment");
 const {InteractionResponseType} = require("discord-interactions");
 
+/*
+    Start production
+ */
 const startProduction = async (discoUser,idagent)=>{
 
     try{
@@ -38,6 +43,38 @@ const startProduction = async (discoUser,idagent)=>{
     }
 }
 
+const endShift = async (discoUser,_idproduction,_idagent)=>{
+    try{
+        // Collection all input
+        const login = await findLoginByDiscouser(discoUser);
+        const _idlogin = login.idlogin;
+        const _loginpost = login.loginpost;
+        const agent = await findUser(_idagent);
+        const _agentfirstname = agent.Agentfirstname;
+        console.log("_idlogin :",_idlogin)
+        console.log("_loginpost :",_loginpost)
+        console.log("_idproduction :",_idproduction)
+        console.log("_agentfirstname :",_agentfirstname)
+        const _idprod_action = 4;
+        const _productiondetailsdate = moment().format('yyyy-MM-DD HH:mm:ss');
+        await addProdDetails([_productiondetailsdate,_idprod_action,_idproduction]);
+
+        const cdrdetails = await fetchlastcdrbyloginpost(_loginpost)
+        const _Resultopencdrid = cdrdetails[0].iddatingcdrdetails
+        await updateProdResult([_Resultopencdrid,_idproduction])
+
+        const _result = await fetchresultatend(_idproduction)
+
+        return notifMessage.info(`Fin de shift [${_agentfirstname}]:\n- date : ${_productiondetailsdate}\n- login : ${_loginpost}\n- Nb appel : ${_result.countcall}\n- Durée d'appel : ${_result.durecall}\n- TCM/ACD : ${_result.acdcall}`)
+    }catch (e){
+        console.log(e)
+        return notifMessage.error('Erreur survenu');
+    }
+}
+
+/*
+    Break management :
+ */
 const addBreakMidlware = async (discoUser,_idproduction,_idagent,_idprod_action,msgTitle)=>{
     try{
         // Collection all input
@@ -58,6 +95,7 @@ const addBreakMidlware = async (discoUser,_idproduction,_idagent,_idprod_action,
         return notifMessage.error('Erreur survenu');
     }
 }
+
 const addBreak = {
     _start:async (discoUser,_idproduction,_idagent)=>{
         return addBreakMidlware(discoUser,_idproduction,_idagent,2,'Début du pause');

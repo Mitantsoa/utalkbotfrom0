@@ -32,6 +32,11 @@ async function addProdResult(value){
     return await insert(sql,value);
 }
 
+async function updateProdResult(value){
+    const sql = 'UPDATE `result` SET `Resultendcdrid`= ? WHERE `Production_idProduction` = ?';
+    return await insert(sql,value);
+}
+
 /*
     === check production not closed for login/discousername
  */
@@ -62,5 +67,20 @@ async function fetchlastcdrbyloginpost(loginpost){
     //data[0].iddatingcdrdetails
 }
 
+async function fetchresultatend(value){
+    const sql = `select
+        r.Production_idProduction as idProduction,
+        case when r.Resultopencdrid is null then cdrend.datingcdrdetailscountcall else cdrend.datingcdrdetailscountcall - cdrst.datingcdrdetailscountcall end as countcall,
+        case when r.Resultopencdrid is null then cdrend.datingcdrdetailscallduration else cdrend.datingcdrdetailscallduration - cdrst.datingcdrdetailscallduration end as durecall,
+        case when r.Resultopencdrid is null then cdrend.datingcdrdetailscallacd else (cdrend.datingcdrdetailscallduration - cdrst.datingcdrdetailscallduration)/(cdrend.datingcdrdetailscountcall - cdrst.datingcdrdetailscountcall)*60 end as acdcall
+        from
+        result as r left join
+        datingcdrdetails as cdrst on (r.Resultopencdrid=cdrst.iddatingcdrdetails)
+        left join datingcdrdetails as cdrend on (r.Resultendcdrid=cdrend.iddatingcdrdetails)
+        where r.Production_idProduction = ?`;
+    const data = await fetch(sql,[value])
+    return data[0];
+}
 
-module.exports = {addProd,addProdDetails,fetchopenproductionfromuserdisco,addProdResult,fetchlastcdrbyloginpost}
+
+module.exports = {addProd,addProdDetails,fetchopenproductionfromuserdisco,addProdResult,fetchlastcdrbyloginpost,updateProdResult,fetchresultatend}
