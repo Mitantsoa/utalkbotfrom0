@@ -14,9 +14,9 @@ const action = async ({data,member})=>{
         console.log("_isLoginOnProd :",_isLoginOnProd)
         if(!_isLoginOnProd.status) return notifMessage.info(`Login **${_loginpost.loginpost}** n'est actuellement pas en production merci de commencer un shift avant une pause.`);
 
-        const _addBreak = await endShift(discoUser,_isLoginOnProd.data.idproduction,_isLoginOnProd.data.idagent)
+        const _endProd = await endShift(discoUser,_isLoginOnProd.data.idproduction,_isLoginOnProd.data.idagent)
 
-        return _addBreak;
+        return _endProd;
 
     }catch (e) {
         console.log(e)
