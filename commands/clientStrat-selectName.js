@@ -1,12 +1,19 @@
 const {InteractionResponseType} = require("discord-interactions");
 const {findAll} = require('../repository/repoAgent')
+const {isLoginOnProd,notifMessage} = require("../service/myService");
+const {findLoginByDiscouser} = require("../repository/repoLogin");
 
 const name = "startProd";
 const updatePrev = false;
 const deferred = true;
-const action = async ({interactionid})=>{
+const action = async ({interactionid,member})=>{
     try {
         console.log('=========interactionid',interactionid)
+        const discoUser = member.user.username
+        const _loginpost = await findLoginByDiscouser()
+        const _isLoginOnProd = await isLoginOnProd(discoUser)
+        if(!_isLoginOnProd) return notifMessage.info(`Login **${_loginpost.loginpost}** toujours en service merci de terminer le shift encours`);
+
         const allagent = await findAll();
         const options = allagent.map((v,i)=>{
             return {

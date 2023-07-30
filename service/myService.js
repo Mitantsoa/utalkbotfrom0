@@ -1,16 +1,12 @@
 const {findLoginByDiscouser} = require("../repository/repoLogin");
 const {addProd,addProdDetails,addProdResult,fetchlastcdrbyloginpost, fetchopenproductionfromuserdisco} = require("../repository/repoProduction");
 const moment = require("moment");
+const {InteractionResponseType} = require("discord-interactions");
 
 const startProduction = async (discoUser,idagent)=>{
 
     try{
-        // check if login available
-        const openProd = await fetchopenproductionfromuserdisco(discoUser)
-        console.log("openProd : ",openProd)
-        console.log("openProd.size : ",openProd.length)
-        const isAvailable = openProd.length > 0 ? false : true;
-        console.log("isAvailable : ",isAvailable)
+
         // Collection all input
         const login = await findLoginByDiscouser(discoUser);
         const _idlogin = login.idlogin;
@@ -18,8 +14,6 @@ const startProduction = async (discoUser,idagent)=>{
         console.log("_idlogin :",_idlogin)
         console.log("_loginpost :",_loginpost)
         const _idagent = idagent;
-
-        if(!isAvailable) return `Login **${_loginpost}** toujours en service merci de terminer le shift encours`;
 
         const insertProd = await addProd([_idagent,_idlogin]);
         const _idproduction = insertProd[0].insertId;
@@ -41,4 +35,43 @@ const startProduction = async (discoUser,idagent)=>{
     }
 }
 
-module.exports = {startProduction}
+const isLoginOnProd = async (discoUser)=> {
+    // check if login available
+    const openProd = await fetchopenproductionfromuserdisco(discoUser)
+    console.log("openProd : ",openProd)
+    console.log("openProd.size : ",openProd.length)
+    const isAvailable = openProd.length > 0 ? false : true;
+    console.log("isAvailable : ",isAvailable)
+
+}
+
+const notifMessage = {
+    "info" : (message)=>{
+        return notifMessagebase({type:"INFO",desc:message,color:5814783});
+    },
+    "error" : (message)=>{
+        return notifMessagebase({type:"ERROR",desc:message,color:13575703});
+    },
+    "warrning" : (message)=>{
+        return notifMessagebase({type:"INFO",desc:message,color:14582290});
+    }
+}
+
+const notifMessagebase = ({type,desc,color})=>{
+    return {
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data:{
+            "content": "",
+            "embeds": [
+                {
+                    "title": type,
+                    "description": desc,
+                    "color": color
+                }
+            ],
+            "components": []
+        }
+    };
+}
+
+module.exports = {startProduction,isLoginOnProd,notifMessage}
