@@ -31,8 +31,8 @@ const action = async ({interactionid,member})=>{
         const data = {
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             data:{
-                "content": "",
-                "flags":5,
+                "content": "here your are",
+                "flags":6,
                 "embeds": [
                     {
                         "title": "Merci de vous identifer parmis la liste",
