@@ -27,6 +27,9 @@ async function fetch(sql){
 async function insert(sql,value){
     try{
         let data = await con.promise().query(sql,value);
+        console.group("====== mysql :",sql)
+        console.log("====== mysql data :",data)
+        console.groupEnd()
         return data
     }catch (e) {
         throw e

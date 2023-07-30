@@ -77,7 +77,7 @@ async function fetchresultatend(value){
         result as r left join
         datingcdrdetails as cdrst on (r.Resultopencdrid=cdrst.iddatingcdrdetails)
         left join datingcdrdetails as cdrend on (r.Resultendcdrid=cdrend.iddatingcdrdetails)
-        where r.Production_idProduction = ?`;
+        where r.Production_idProduction = ${value}`;
     const data = await fetch(sql,[value])
     return data[0];
 }
