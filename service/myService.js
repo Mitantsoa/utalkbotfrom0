@@ -45,7 +45,7 @@ const isLoginOnProd = async (discoUser)=> {
     console.log("openProd.size : ",openProd.length)
     const isAvailable = openProd.length > 0 ? false : true;
     console.log("isAvailable : ",isAvailable)
-
+    return isAvailable
 }
 
 const notifMessage = {
