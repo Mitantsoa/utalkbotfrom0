@@ -12,7 +12,7 @@ const action = async ({data,member})=>{
         const _loginpost = await findLoginByDiscouser(discoUser)
         const _isLoginOnProd = await isLoginOnProd(discoUser)
         console.log("_isLoginOnProd :",_isLoginOnProd)
-        if(!_isLoginOnProd.status) return notifMessage.info(`Login **${_loginpost.loginpost}** n'est actuellement pas en production merci de commencer un shift avant une pause.`);
+        if(!_isLoginOnProd.status) return notifMessage.info(`Login **${_loginpost.loginpost}** n'est actuellement pas en production merci de commencer un shift.`);
 
         const _endProd = await endShift(discoUser,_isLoginOnProd.data.idproduction,_isLoginOnProd.data.idagent)
 
