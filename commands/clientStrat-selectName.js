@@ -2,7 +2,7 @@ const {InteractionResponseType} = require("discord-interactions");
 const {findAll} = require('../repository/repoAgent')
 
 const name = "startProd";
-const updatePrev = false;
+const updatePrev = true;
 const deferred = true;
 const action = async ({interactionid})=>{
     try {
