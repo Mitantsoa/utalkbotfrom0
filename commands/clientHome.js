@@ -14,7 +14,7 @@ const action = ()=>{
             "data": {
                 "tts": false,
                 "content": "Home :",
-                "flags":"00000000000000000000000001000000",
+                "flags":1<<6,
                 "embeds": [
                     {
                         "title": "Agent Home",
