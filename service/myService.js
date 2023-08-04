@@ -142,6 +142,7 @@ const notifMessagebase = ({type,desc,color})=>{
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data:{
             "content": "",
+            "flags":1<<6,
             "embeds": [
                 {
                     "title": type,
