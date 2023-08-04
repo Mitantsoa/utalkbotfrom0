@@ -133,6 +133,22 @@ app.post('/',async function(req, res){
     if(type == 1) return res.send({type:1});
 });
 
+app.get('/prodreport',async (req,res)=>{
+    const data = {
+        "content": null,
+        "embeds": [
+            {
+                "title": "Procution du 23/07/2023 12h:23",
+                "description": "|- **Finaritra** [5101] :  *nb appel* = 25  |  *durée appel* = 89 | *adc* = 100\n|- **Randrianasolo**  [5102] :  *nb appel = 25 | durée appel = 89 | adc = 100*\n|- **Randrianasolo** [5103] :  *nb appel = 25 | durée appel = 89 | adc = 100*\n|- **Randrianasolo** [5104] :  *nb appel = 25 | durée appel = 89 | adc = 100*",
+                "color": 2722314
+            }
+        ],
+        "attachments": []
+    }
+    const url  = "https://discord.com/api/webhooks/1093900875036114964/WasH3BwApUEwb7sqs-NILXJF-Rdth8hOQBWJJh1I5uYNSbb8fG46CCFAiAQ69PLUHrIN"
+    await axios.post(url,data)
+})
+
 app.listen(PORT, () => {
     logger('Listening on port', PORT);
 });

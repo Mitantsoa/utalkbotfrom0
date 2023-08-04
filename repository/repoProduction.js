@@ -103,5 +103,26 @@ async function fetchresultatend(value){
     return data[0];
 }
 
+/*
+    === check production not closed for login/discousername
+ */
+async function fetchopenproduction(){
+    const sql = `select 
+        p.idproduction,
+        p.idagent,
+        p.idlogin
+        from login as l 
+        inner join production as p on (l.idlogin=p.idlogin) 
+        inner join (
+        select idproduction from productiondetails where idprod_action = 1
+        ) as _s on (p.idproduction=_s.idproduction) 
+        inner join (
+        select idproduction from productiondetails where idprod_action <> 4 and idproduction not in (select idproduction from productiondetails where idprod_action = 4 group by idproduction) group by idproduction
+        ) as _e on (p.idproduction=_e.idproduction) 
+        inner join agent a on (p.idagent=a.idagentd)
+        where 
+        l.logindiscousername = '${value}'`;
+    return await fetch(sql,[value]);
+}
 
 module.exports = {addProd,addProdDetails,fetchopenproductionfromuserdisco,addProdResult,fetchlastcdrbyloginpost,updateProdResult,fetchresultatend,fetchopenpauseproductionfromuserdisco}
