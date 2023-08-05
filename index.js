@@ -136,17 +136,23 @@ app.get('/prodreport',async (req,res)=>{
 
     try{
         const data = await fetchcurrentproductionresult();
-        let listprod = ""
+        let listprod = []
         data.forEach((v,i)=>{
-            listprod += `|- **${v.Agentfirstname +"-"+v.Agentlastname}** [${v.loginpost}] :  *nb appel* = ${v.nbcall}  |  *durée appel* = ${v.callduration} | *adc* = ${v.adc}\n`;
+            // listprod += `|- **${v.Agentfirstname +"-"+v.Agentlastname}** [${v.loginpost}] :  *nb appel* = ${v.nbcall}  |  *durée appel* = ${v.callduration} | *adc* = ${v.adc}\n`;
+            const status = v.status == "on" ? "encours" : "fini";
+            listprod.push({
+                "name": `**${v.Agentfirstname +"-"+v.Agentlastname}** [${v.loginpost}] : *${status}*`,
+                "value": `*nb appel* = ${v.nbcall}  |  *durée appel* = ${v.callduration} | *adc* = ${v.adc}\nDébut : ${v.open_proddate}\nFin : ${v.end_proddate}`
+            });
         })
         const msg = {
             "content": null,
             "embeds": [
                 {
                     "title": `Procution du ${moment().format('yyyy-MM-DD HH:mm:ss')}`,
-                    "description": listprod,
-                    "color": 2722314
+                    "description": "",
+                    "color": 2722314,
+                    "fields":listprod
                 }
             ],
             "attachments": []

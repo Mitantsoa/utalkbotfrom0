@@ -118,7 +118,8 @@ async function fetchopenproduction(){
         Agentlastname,
         end_callnb - open_callnb as nbcall,
         end_callduration - open_callduration as callduration,
-        (end_callduration - open_callduration) / (end_callnb - open_callnb) *60 as adc
+        (end_callduration - open_callduration) / (end_callnb - open_callnb) *60 as adc,
+        'on' as status
         from
         (
         select
@@ -168,7 +169,8 @@ async function fetchdaycloseproduction(day){
         Agentlastname,
         end_callnb - open_callnb as nbcall,
         end_callduration - open_callduration as callduration,
-        (end_callduration - open_callduration) / (end_callnb - open_callnb) *60 as adc
+        (end_callduration - open_callduration) / (end_callnb - open_callnb) *60 as adc,
+        'off' as status
         from
         (
         select
