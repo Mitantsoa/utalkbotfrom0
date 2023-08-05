@@ -12,7 +12,7 @@ const {
 } =require('discord-interactions')
 const { VerifyDiscordRequest, getRandomEmoji, DiscordRequest,logger,createInterResp,deferedMsg,editMessage,editdeferedMsg } = require('./service/utils.js');
 const {findtoken,addtoken} = require('./repository/repotoken.js')
-const {notifMessage} = require("./service/myService");
+const {notifMessage, fetchcurrentproductionresult} = require("./service/myService");
 // Commands loading
 var normalizedPath = require("path").join(__dirname, "commands");
 let commandClass = {}
@@ -132,7 +132,13 @@ app.post('/',async function(req, res){
 });
 
 app.get('/prodreport',async (req,res)=>{
-    const data = {
+    const data = await fetchcurrentproductionresult();
+
+    let listprod = ""
+    data.forEach((v,i)=>{
+        listprod += "|- **Finaritra** [5101] :  *nb appel* = 25  |  *durée appel* = 89 | *adc* = 100\n";
+    })
+    const msg = {
         "content": null,
         "embeds": [
             {
@@ -144,7 +150,7 @@ app.get('/prodreport',async (req,res)=>{
         "attachments": []
     }
     const url  = "https://discord.com/api/webhooks/1093900875036114964/WasH3BwApUEwb7sqs-NILXJF-Rdth8hOQBWJJh1I5uYNSbb8fG46CCFAiAQ69PLUHrIN"
-    await axios.post(url,data)
+    await axios.post(url,msg)
 })
 
 app.listen(PORT, () => {

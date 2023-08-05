@@ -1,7 +1,7 @@
 const {findLoginByDiscouser} = require("../repository/repoLogin");
 const {findUser} = require("../repository/repoAgent");
 const {addProd,addProdDetails,addProdResult,fetchlastcdrbyloginpost, fetchopenproductionfromuserdisco, updateProdResult,
-    fetchresultatend, fetchopenpauseproductionfromuserdisco
+    fetchresultatend, fetchopenpauseproductionfromuserdisco,fetchdaycloseproduction,fetchopenproduction
 } = require("../repository/repoProduction");
 const moment = require("moment");
 const {InteractionResponseType} = require("discord-interactions");
@@ -155,4 +155,12 @@ const notifMessagebase = ({type,desc,color})=>{
     };
 }
 
-module.exports = {startProduction,isLoginOnProd,notifMessage,addBreak,endShift,isLoginOnPause}
+async function fetchcurrentproductionresult(){
+    const r1 = await fetchopenproduction()
+    const r2 = await fetchdaycloseproduction(moment().format('yyyyMMDD'))
+    return [...r1,...r2]
+    // return [].concat(r1,r2)
+
+}
+
+module.exports = {startProduction,isLoginOnProd,notifMessage,addBreak,endShift,isLoginOnPause,fetchcurrentproductionresult}
