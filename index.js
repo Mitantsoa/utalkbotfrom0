@@ -88,7 +88,8 @@ app.post('/interactions', async function (req, res) {
                 // store current interaction and token
                 await addtoken([id,application_id,token])
                 // fetch previous token of previous interaction
-                if(cmdClass.updatePrev) prevInteractiontoken = await findtoken(prevInteractionId,application_id) ; prevInteractiontoken = prevInteractiontoken["interactiontoken"];
+                // if(cmdClass.updatePrev) prevInteractiontoken = await findtoken(prevInteractionId,application_id) ; prevInteractiontoken = prevInteractiontoken["interactiontoken"];
+                prevInteractiontoken = await findtoken(prevInteractionId,application_id);
             }catch (e){
                 logger("token sql error: "+e)
             }
@@ -97,8 +98,14 @@ app.post('/interactions', async function (req, res) {
             logger("prevInteractiontoken = "+prevInteractiontoken)
 
             // check if deferred si required
-            if(cmdClass.deferred && cmdClass.updatePrev) await editdeferedMsg(application_id,prevInteractiontoken)
-            if (cmdClass.deferred && !cmdClass.updatePrev) await deferedMsg(_createdUrl,token)
+            // if(cmdClass.deferred && cmdClass.updatePrev) await editdeferedMsg(application_id,prevInteractiontoken)
+            await deferedMsg(
+                _createdUrl,
+                cmdClass.updatePrev,
+                application_id,
+                prevInteractiontoken,
+                cmdClass.mgsHeader
+            )
 
             // await deferedMsg(_createdUrl)
             const resp = await  cmdClass.action({"interComp":interComp,"interactionid":id,"data":data,"member":member})
@@ -116,18 +123,6 @@ app.post('/interactions', async function (req, res) {
         res.send(notifMessage.error())
     }
 
-    // }else{
-    //     const { custom_id, components } = data;
-    //     console.log("data :",data)
-    //     const cmdClass = commandClass[custom_id]
-    //     try{
-    //         const resp = await cmdClass.action(components)
-    //         console.log(resp)
-    //         await createInterResp(resp,_createdUrl)
-    //     }catch (e) {
-    //         logger("Custom_id :"+custom_id+", does not exist")
-    //     }
-    // }
 });
 
 app.post('/',async function(req, res){

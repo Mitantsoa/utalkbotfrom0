@@ -5,6 +5,7 @@ config;
 const { verifyKey, InteractionResponseType} = require('discord-interactions');
 const fs = require("fs");
 const axios = require("axios");
+const deferedmsgbuilder = require('./messagetype.js')
 
 function VerifyDiscordRequest(clientKey) {
     return function (req, res, buf, encoding) {
@@ -93,17 +94,14 @@ async function createInterResp(msg,url){
         .catch(e => console.log("there is error",e.response.data))
 }
 
-async function deferedMsg(url){
-    const msg = {
-        type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
-        "data": {
-            "tts": false,
-            "flags":1<<6,
-            "type":19,
-            "content": "WIP",
-            "allowed_mentions": { "parse": [] },
-        }};
-    await createInterResp(msg,url)
+async function deferedMsg(url,isEdit,application_id,token,mgsHeader){
+
+    const msg = deferedmsgbuilder(mgsHeader)
+    if(isEdit){
+        await createInterResp(msg,url)
+    }else{
+        await editMessage(msg,application_id,token)
+    }
 }
 
 async function editdeferedMsg(application_id,token){
