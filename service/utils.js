@@ -99,6 +99,7 @@ async function deferedMsg(url){
         "data": {
             "tts": false,
             "flags":1<<6,
+            "type":19,
             "content": "WIP",
             "allowed_mentions": { "parse": [] },
         }};
