@@ -112,8 +112,8 @@ async function fetchopenproduction(){
         select
         idproduction,
         loginpost,
-        open_proddate,
-        end_proddate,
+        date_format(open_proddate,'%Y-%m-%d %H:%i:%s') as open_proddate,
+        date_format(end_proddate,'%Y-%m-%d %H:%i:%s') as end_proddate,
         Agentfirstname,
         Agentlastname,
         end_callnb - open_callnb as nbcall,
@@ -163,8 +163,8 @@ async function fetchdaycloseproduction(day){
         select
         idproduction,
         loginpost,
-        open_proddate,
-        end_proddate,
+        date_format(open_proddate,'%Y-%m-%d %H:%i:%s') as open_proddate,
+        date_format(end_proddate,'%Y-%m-%d %H:%i:%s') as end_proddate,
         Agentfirstname,
         Agentlastname,
         end_callnb - open_callnb as nbcall,
