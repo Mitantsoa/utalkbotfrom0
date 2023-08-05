@@ -136,7 +136,7 @@ app.get('/prodreport',async (req,res)=>{
 
     let listprod = ""
     data.forEach((v,i)=>{
-        listprod += "|- **Finaritra** [5101] :  *nb appel* = 25  |  *durée appel* = 89 | *adc* = 100\n";
+        listprod += `|- **${v.Agentfirstname +"-"+v.Agentlastname}** [${v.loginpost}] :  *nb appel* = ${v.nbcall}  |  *durée appel* = ${v.callduration} | *adc* = ${v.adc}\n`;
     })
     const msg = {
         "content": null,
