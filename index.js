@@ -78,6 +78,7 @@ app.post('/interactions', async function (req, res) {
         // const { name } = data;
         const cmdClass = commandClass[interIndex]
         res.send(notifMessage.error());
+        console.log(res)
         // try{
         //     logger('cmdClass.deferred:'+cmdClass.deferred)
         //     logger('cmdClass.updatePrev:'+cmdClass.updatePrev)
