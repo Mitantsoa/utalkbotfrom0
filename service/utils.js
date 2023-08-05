@@ -97,7 +97,7 @@ async function createInterResp(msg,url){
 async function deferedMsg(url,isEdit,application_id,token,mgsHeader){
 
     const msg = deferedmsgbuilder(mgsHeader)
-    if(isEdit){
+    if(!isEdit){
         await createInterResp(msg,url)
     }else{
         await editMessage(msg,application_id,token)
