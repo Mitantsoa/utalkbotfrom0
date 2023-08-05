@@ -8,6 +8,9 @@ const {isLoginOnProd, notifMessage, addBreak, isLoginOnPause} = require("../serv
 const name = "clientpause-end";
 const updatePrev = false;
 const deferred = true;
+const mgsHeader = {
+    ephemeral: false,
+};
 const action = async ({data,member})=>{
 
     try {
@@ -31,4 +34,4 @@ const action = async ({data,member})=>{
     }
 }
 
-module.exports = {name,action,updatePrev,deferred}
+module.exports = {name,action,updatePrev,deferred,mgsHeader}

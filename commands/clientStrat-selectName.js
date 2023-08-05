@@ -6,6 +6,9 @@ const {findLoginByDiscouser} = require("../repository/repoLogin");
 const name = "startProd";
 const updatePrev = false;
 const deferred = true;
+const mgsHeader = {
+    ephemeral: false,
+};
 const action = async ({interactionid,member})=>{
     try {
         console.log('=========interactionid',interactionid)
@@ -66,4 +69,4 @@ const action = async ({interactionid,member})=>{
     }
 }
 
-module.exports = {name,action,updatePrev,deferred}
+module.exports = {name,action,updatePrev,deferred,mgsHeader}

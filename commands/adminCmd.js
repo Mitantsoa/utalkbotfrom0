@@ -6,6 +6,9 @@ const {notifMessage} = require("../service/myService");
 const name = "useradd";
 const updatePrev = false;
 const deferred = true;
+const mgsHeader = {
+    ephemeral: false,
+};
 const action = ()=>{
     logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE);
     try {
@@ -58,4 +61,4 @@ const action = ()=>{
     }
 }
 
-module.exports = {name,action,updatePrev,deferred}
+module.exports = {name,action,updatePrev,deferred,mgsHeader}

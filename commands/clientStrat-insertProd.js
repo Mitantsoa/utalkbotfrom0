@@ -7,6 +7,9 @@ const {notifMessage} = require("../service/myService");
 const name = "clientstart-agentUID";
 const updatePrev = true;
 const deferred = true;
+const mgsHeader = {
+    ephemeral: false,
+};
 const action = async ({data,member})=>{
 
     try {
@@ -25,4 +28,4 @@ const action = async ({data,member})=>{
     }
 }
 
-module.exports = {name,action,updatePrev,deferred}
+module.exports = {name,action,updatePrev,deferred,mgsHeader}

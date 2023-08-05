@@ -4,6 +4,9 @@ const {isLoginOnProd, notifMessage, addBreak, endShift} = require("../service/my
 const name = "stopProd";
 const updatePrev = false;
 const deferred = true;
+const mgsHeader = {
+    ephemeral: false,
+};
 const action = async ({data,member})=>{
 
     try {
@@ -24,4 +27,4 @@ const action = async ({data,member})=>{
     }
 }
 
-module.exports = {name,action,updatePrev,deferred}
+module.exports = {name,action,updatePrev,deferred,mgsHeader}

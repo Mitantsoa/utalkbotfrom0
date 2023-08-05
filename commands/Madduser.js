@@ -6,6 +6,9 @@ const {notifMessage} = require("../service/myService");
 const name = "cool_modal";
 const updatePrev = false;
 const deferred = true;
+const mgsHeader = {
+    ephemeral: false,
+};
 const action = async (comp)=>{
         // logger("InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE= "+ InteractionResponseType.MODAL);
     try {
@@ -57,4 +60,4 @@ const action = async (comp)=>{
     }
 }
 
-module.exports = {name,action,updatePrev,deferred}
+module.exports = {name,action,updatePrev,deferred,mgsHeader}

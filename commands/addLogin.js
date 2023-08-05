@@ -29,6 +29,9 @@ console.log(inputbuilder)
 const name = "add_login";
 const updatePrev = false;
 const deferred = false;
+const mgsHeader = {
+    ephemeral: false,
+};
 const action = async ()=>{
     logger("InteractionResponseType.MODAL= "+ InteractionResponseType.MODAL);
     try {
@@ -50,4 +53,4 @@ const action = async ()=>{
     }
 }
 
-module.exports = {name,action,updatePrev,deferred}
+module.exports = {name,action,updatePrev,deferred,mgsHeader}
