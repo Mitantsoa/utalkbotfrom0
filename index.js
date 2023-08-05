@@ -13,6 +13,7 @@ const {
 const { VerifyDiscordRequest, getRandomEmoji, DiscordRequest,logger,createInterResp,deferedMsg,editMessage,editdeferedMsg } = require('./service/utils.js');
 const {findtoken,addtoken} = require('./repository/repotoken.js')
 const {notifMessage, fetchcurrentproductionresult} = require("./service/myService");
+const moment = require("moment");
 // Commands loading
 var normalizedPath = require("path").join(__dirname, "commands");
 let commandClass = {}
@@ -132,25 +133,31 @@ app.post('/',async function(req, res){
 });
 
 app.get('/prodreport',async (req,res)=>{
-    const data = await fetchcurrentproductionresult();
 
-    let listprod = ""
-    data.forEach((v,i)=>{
-        listprod += `|- **${v.Agentfirstname +"-"+v.Agentlastname}** [${v.loginpost}] :  *nb appel* = ${v.nbcall}  |  *durée appel* = ${v.callduration} | *adc* = ${v.adc}\n`;
-    })
-    const msg = {
-        "content": null,
-        "embeds": [
-            {
-                "title": "Procution du 23/07/2023 12h:23",
-                "description": "|- **Finaritra** [5101] :  *nb appel* = 25  |  *durée appel* = 89 | *adc* = 100\n|- **Randrianasolo**  [5102] :  *nb appel = 25 | durée appel = 89 | adc = 100*\n|- **Randrianasolo** [5103] :  *nb appel = 25 | durée appel = 89 | adc = 100*\n|- **Randrianasolo** [5104] :  *nb appel = 25 | durée appel = 89 | adc = 100*",
-                "color": 2722314
-            }
-        ],
-        "attachments": []
+    try{
+        const data = await fetchcurrentproductionresult();
+        let listprod = ""
+        data.forEach((v,i)=>{
+            listprod += `|- **${v.Agentfirstname +"-"+v.Agentlastname}** [${v.loginpost}] :  *nb appel* = ${v.nbcall}  |  *durée appel* = ${v.callduration} | *adc* = ${v.adc}\n`;
+        })
+        const msg = {
+            "content": null,
+            "embeds": [
+                {
+                    "title": `Procution du ${moment().format('yyyy-MM-DD HH:mm:ss')}`,
+                    "description": listprod,
+                    "color": 2722314
+                }
+            ],
+            "attachments": []
+        }
+        const url  = "https://discord.com/api/webhooks/1093900875036114964/WasH3BwApUEwb7sqs-NILXJF-Rdth8hOQBWJJh1I5uYNSbb8fG46CCFAiAQ69PLUHrIN"
+        await axios.post(url,msg)
+        res.send(listprod)
+    }catch (e) {
+        res.send(e)
     }
-    const url  = "https://discord.com/api/webhooks/1093900875036114964/WasH3BwApUEwb7sqs-NILXJF-Rdth8hOQBWJJh1I5uYNSbb8fG46CCFAiAQ69PLUHrIN"
-    await axios.post(url,msg)
+
 })
 
 app.listen(PORT, () => {
