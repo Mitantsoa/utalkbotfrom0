@@ -197,7 +197,7 @@ async function fetchdaycloseproduction(day){
         left join datingcdrdetails cdropen on (r.Resultopencdrid=cdropen.iddatingcdrdetails)
         left join datingcdrdetails cdrclose on (r.Resultendcdrid=cdrclose.iddatingcdrdetails)
         ) m`;
-    return await fetch(sql,[value]);
+    return await fetch(sql,[]);
 }
 
 module.exports = {addProd,addProdDetails,fetchopenproductionfromuserdisco,addProdResult,fetchlastcdrbyloginpost,updateProdResult,fetchresultatend,fetchopenpauseproductionfromuserdisco,fetchdaycloseproduction,fetchopenproduction}

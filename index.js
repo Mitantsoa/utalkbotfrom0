@@ -16,16 +16,16 @@ const {notifMessage, fetchcurrentproductionresult} = require("./service/myServic
 // Commands loading
 var normalizedPath = require("path").join(__dirname, "commands");
 let commandClass = {}
-console.log("normalizedPath:",normalizedPath)
+// console.log("normalizedPath:",normalizedPath)
 fs.readdirSync(normalizedPath).forEach(function(file) {
 
     const body = require(normalizedPath +'/'+ file)
-    console.log("body" + body)
+    // console.log("body" + body)
     commandClass[body.name] = body;
-    console.log(normalizedPath +"/"+ file)
+    // console.log(normalizedPath +"/"+ file)
 
 });
-console.log("commandClass",commandClass)
+// console.log("commandClass",commandClass)
 // commandClass.AdminCmd()
 
 // Create an express app
