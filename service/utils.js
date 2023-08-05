@@ -98,6 +98,7 @@ async function deferedMsg(url){
         type: InteractionResponseType.DEFERRED_CHANNEL_MESSAGE_WITH_SOURCE,
         "data": {
             "tts": false,
+            "flags":1<<6,
             "content": "WIP",
             "allowed_mentions": { "parse": [] },
         }};
