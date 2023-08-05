@@ -77,39 +77,39 @@ app.post('/interactions', async function (req, res) {
         let prevInteractiontoken = ""
         // const { name } = data;
         const cmdClass = commandClass[interIndex]
-
-        try{
-            logger('cmdClass.deferred:'+cmdClass.deferred)
-            logger('cmdClass.updatePrev:'+cmdClass.updatePrev)
-
-            try{
-                // store current interaction and token
-                await addtoken([id,application_id,token])
-                // fetch previous token of previous interaction
-                if(cmdClass.updatePrev) prevInteractiontoken = await findtoken(prevInteractionId,application_id) ; prevInteractiontoken = prevInteractiontoken["interactiontoken"];
-            }catch (e){
-                logger("token sql error: "+e)
-            }
-
-            logger("interIndex = "+interIndex)
-            logger("prevInteractiontoken = "+prevInteractiontoken)
-
-            // check if deferred si required
-            if(cmdClass.deferred && cmdClass.updatePrev) await editdeferedMsg(application_id,prevInteractiontoken)
-            if (cmdClass.deferred && !cmdClass.updatePrev) await deferedMsg(_createdUrl,token)
-
-            // await deferedMsg(_createdUrl)
-            const resp = await  cmdClass.action({"interComp":interComp,"interactionid":id,"data":data,"member":member})
-
-            // check if response need be to updated on interaction
-            if (cmdClass.updatePrev) await editMessage(resp,application_id,prevInteractiontoken)
-            else if (cmdClass.deferred) await editMessage(resp,application_id,token)
-            else await createInterResp(resp,_createdUrl)
-            // res.send(resp)
-        }catch (e) {
-            logger("command :"+interIndex+" does not exist")
-            res.send(notifMessage.error());
-        }
+        res.send(notifMessage.error());
+        // try{
+        //     logger('cmdClass.deferred:'+cmdClass.deferred)
+        //     logger('cmdClass.updatePrev:'+cmdClass.updatePrev)
+        //
+        //     try{
+        //         // store current interaction and token
+        //         await addtoken([id,application_id,token])
+        //         // fetch previous token of previous interaction
+        //         if(cmdClass.updatePrev) prevInteractiontoken = await findtoken(prevInteractionId,application_id) ; prevInteractiontoken = prevInteractiontoken["interactiontoken"];
+        //     }catch (e){
+        //         logger("token sql error: "+e)
+        //     }
+        //
+        //     logger("interIndex = "+interIndex)
+        //     logger("prevInteractiontoken = "+prevInteractiontoken)
+        //
+        //     // check if deferred si required
+        //     if(cmdClass.deferred && cmdClass.updatePrev) await editdeferedMsg(application_id,prevInteractiontoken)
+        //     if (cmdClass.deferred && !cmdClass.updatePrev) await deferedMsg(_createdUrl,token)
+        //
+        //     // await deferedMsg(_createdUrl)
+        //     const resp = await  cmdClass.action({"interComp":interComp,"interactionid":id,"data":data,"member":member})
+        //
+        //     // check if response need be to updated on interaction
+        //     if (cmdClass.updatePrev) await editMessage(resp,application_id,prevInteractiontoken)
+        //     else if (cmdClass.deferred) await editMessage(resp,application_id,token)
+        //     else await createInterResp(resp,_createdUrl)
+        //     // res.send(resp)
+        // }catch (e) {
+        //     logger("command :"+interIndex+" does not exist")
+        //     res.send(notifMessage.error());
+        // }
     }catch (e) {
         res.send(notifMessage.error())
     }
