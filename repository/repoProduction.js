@@ -154,7 +154,7 @@ async function fetchopenproduction(){
         select _cdrdetails.* from datingcdrdetails _cdrdetails inner join (select max(datingcdrdetailssnapshotdate)date_,datingcdrdetailslogin from datingcdrdetails group by datingcdrdetailslogin,date_format(datingcdrdetailssnapshotdate,'%Y%m%d')) _lastlogin on (_cdrdetails.datingcdrdetailssnapshotdate=_lastlogin.date_ and _cdrdetails.datingcdrdetailslogin=_lastlogin.datingcdrdetailslogin)
         ) as cdr_last on (l.loginpost=cdr_last.datingcdrdetailslogin and cdr_last.datingcdrdetailssnapshotdate >= cdropen.datingcdrdetailssnapshotdate)
         ) m`;
-    return await fetch(sql,[value]);
+    return await fetch(sql,[]);
 }
 
 async function fetchdaycloseproduction(day){
